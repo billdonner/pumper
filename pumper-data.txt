@@ -1,0 +1,12 @@
+***
+tell me about yourself
+///
+/// more comments
+***
+///
+tell me about your global reach
+***
+can you read code?
+can you explain this swift code? func f(a:Int,b:Int)->Int { let x = a/b; return x**2 }
+***
+///hopefully we ignore the end of comment lines 
