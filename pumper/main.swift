@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import ArgumentParser
+
 
 struct ChatGPTResponse: Codable {
   let choices: [ChatGPTChoice]
@@ -16,10 +16,10 @@ struct ChatGPTChoice: Codable {
 }
 
 func callChapGPT(prompt:String,
-                 outputting: @escaping (String)->Void ) throws {
+                 outputting: @escaping (String)->Void ,wait:Bool = false ) throws {
   
   let apiKey = "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"
-  let apiURL = "xttps://api.openai.com/v1/engines/davinci/completions"
+  let apiURL = "https://api.openai.com/v1/completions"
   
   guard let url = URL(string: apiURL) else {
     fatalError("Invalid API URL")
@@ -30,9 +30,15 @@ func callChapGPT(prompt:String,
   request.setValue("application/json", forHTTPHeaderField: "Content-Type")
   request.setValue("Bearer " + apiKey, forHTTPHeaderField: "Authorization")
   
+   var respo:String = ""
+  
   let parameters: [String: Any] = [
     "prompt": prompt,
-    "max_tokens": 3500,
+    "model": "text-davinci-003",
+    "max_tokens": 1800,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "presence_penalty": 0,
     "temperature": 1.0
   ]
   request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -43,17 +49,38 @@ func callChapGPT(prompt:String,
       return
     }
     do {
-      let response = try JSONDecoder().decode(ChatGPTResponse.self, from: data)
-      let text = response.choices.first?.text ?? "<<nothin>>"
-      outputting(text)
-    } catch {
-      print ("Failed to decode response ",error)
+       let response = try JSONDecoder().decode(ChatGPTResponse.self, from: data)
+       respo  = response.choices.first?.text ?? "<<nothin>>"
+      
+      //let respo = String(decoding:data,as:UTF8.self)
+       outputting(respo)
+    }  catch {
+       print ("Failed to decode response ",error,respo)
     }
   }
   task.resume()
+  // linger here if asked to wait
+  if wait {
+    while true   {
+      sleep(1)
+      if respo != "" { break }
+    }
+  }
 }
+#if os(iOS)
 
+struct SplitFile {
+  
+  var url: String = "https://billdonner.com/fs/gd/pumper-data.txt"
+  
+  var split_pattern = "***"
+  
+  var comments_pattern = "///"
+  
+}
+#else
 
+import ArgumentParser
 
 struct SplitFile: ParsableCommand {
   
@@ -74,18 +101,21 @@ struct SplitFile: ParsableCommand {
   @Argument(help: "The pattern to use to indicate a comments line")
   var comments_pattern: String
   
-  private  func stripComments(source: String, commentStart: String) -> String {
-    let lines = source.split(separator: "\n")
-    var keeplines:[String] = []
-    for line in lines  {
-      if !line.hasPrefix(commentStart) {
-        keeplines += [String(line)]
-      }
-    }
-    return keeplines.joined(separator: "\n")
-  }
+}
   
+#endif
+extension SplitFile {
   func run() throws {
+    func stripComments(source: String, commentStart: String) -> String {
+      let lines = source.split(separator: "\n")
+      var keeplines:[String] = []
+      for line in lines  {
+        if !line.hasPrefix(commentStart) {
+          keeplines += [String(line)]
+        }
+      }
+      return keeplines.joined(separator: "\n")
+    }
     if let url = URL(string:url) {
       // Get the contents of the file.
       let contents = try String(contentsOf: url)
@@ -94,15 +124,21 @@ struct SplitFile: ParsableCommand {
       let chunks = contents.split(separator: split_pattern)
       for chunk in chunks {
         let prompt = stripComments(source: String(chunk), commentStart: comments_pattern)
-        try callChapGPT(prompt : prompt) { response in
-          print("response:\(response)")
+        if prompt.count > 0 {
+          try callChapGPT(prompt : prompt,outputting:  { response in
+            print("response:\(response)")
+          }, wait:true)
         }
       }
     }
     else {
       print ("bad url")
     }
+    sleep(120)
   }
 }
-
+#if os(iOS)
+try SplitFile().run()
+#else
 SplitFile.main()
+#endif

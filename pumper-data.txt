@@ -1,12 +1,50 @@
 ***
-tell me about yourself
-///
-/// more comments
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+
+/* Generate 5 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
 ***
-///
-tell me about your global reach
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
 ***
-can you read code?
-can you explain this swift code? func f(a:Int,b:Int)->Int { let x = a/b; return x**2 }
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
 ***
 ///hopefully we ignore the end of comment lines 

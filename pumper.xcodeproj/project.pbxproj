@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		887565E02A0882400030AE77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887565DF2A0882400030AE77 /* main.swift */; };
 		887565E82A0882810030AE77 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 887565E72A0882810030AE77 /* ArgumentParser */; };
+		887566272A1843A50030AE77 /* pumperiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887566262A1843A50030AE77 /* pumperiosApp.swift */; };
+		887566292A1843A50030AE77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887566282A1843A50030AE77 /* ContentView.swift */; };
+		8875662B2A1843A70030AE77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8875662A2A1843A70030AE77 /* Assets.xcassets */; };
+		8875662E2A1843A70030AE77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8875662D2A1843A70030AE77 /* Preview Assets.xcassets */; };
+		887566322A18441E0030AE77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887565DF2A0882400030AE77 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +32,11 @@
 		887565DC2A0882400030AE77 /* pumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pumper; sourceTree = BUILT_PRODUCTS_DIR; };
 		887565DF2A0882400030AE77 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8875661F2A16B25D0030AE77 /* pumper-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "pumper-data.txt"; sourceTree = "<group>"; };
+		887566242A1843A50030AE77 /* pumperios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pumperios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		887566262A1843A50030AE77 /* pumperiosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pumperiosApp.swift; sourceTree = "<group>"; };
+		887566282A1843A50030AE77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8875662A2A1843A70030AE77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8875662D2A1843A70030AE77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +48,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		887566212A1843A50030AE77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -46,6 +63,7 @@
 			children = (
 				8875661F2A16B25D0030AE77 /* pumper-data.txt */,
 				887565DE2A0882400030AE77 /* pumper */,
+				887566252A1843A50030AE77 /* pumperios */,
 				887565DD2A0882400030AE77 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				887565DC2A0882400030AE77 /* pumper */,
+				887566242A1843A50030AE77 /* pumperios.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +83,25 @@
 				887565DF2A0882400030AE77 /* main.swift */,
 			);
 			path = pumper;
+			sourceTree = "<group>";
+		};
+		887566252A1843A50030AE77 /* pumperios */ = {
+			isa = PBXGroup;
+			children = (
+				887566262A1843A50030AE77 /* pumperiosApp.swift */,
+				887566282A1843A50030AE77 /* ContentView.swift */,
+				8875662A2A1843A70030AE77 /* Assets.xcassets */,
+				8875662C2A1843A70030AE77 /* Preview Content */,
+			);
+			path = pumperios;
+			sourceTree = "<group>";
+		};
+		8875662C2A1843A70030AE77 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8875662D2A1843A70030AE77 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +127,23 @@
 			productReference = 887565DC2A0882400030AE77 /* pumper */;
 			productType = "com.apple.product-type.tool";
 		};
+		887566232A1843A50030AE77 /* pumperios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8875662F2A1843A70030AE77 /* Build configuration list for PBXNativeTarget "pumperios" */;
+			buildPhases = (
+				887566202A1843A50030AE77 /* Sources */,
+				887566212A1843A50030AE77 /* Frameworks */,
+				887566222A1843A50030AE77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pumperios;
+			productName = pumperios;
+			productReference = 887566242A1843A50030AE77 /* pumperios.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -100,6 +155,9 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					887565DB2A0882400030AE77 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					887566232A1843A50030AE77 = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
@@ -121,9 +179,22 @@
 			projectRoot = "";
 			targets = (
 				887565DB2A0882400030AE77 /* pumper */,
+				887566232A1843A50030AE77 /* pumperios */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		887566222A1843A50030AE77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8875662E2A1843A70030AE77 /* Preview Assets.xcassets in Resources */,
+				8875662B2A1843A70030AE77 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		887565D82A0882400030AE77 /* Sources */ = {
@@ -131,6 +202,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				887565E02A0882400030AE77 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		887566202A1843A50030AE77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887566292A1843A50030AE77 /* ContentView.swift in Sources */,
+				887566272A1843A50030AE77 /* pumperiosApp.swift in Sources */,
+				887566322A18441E0030AE77 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +353,69 @@
 			};
 			name = Release;
 		};
+		887566302A1843A70030AE77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"pumperios/Preview Content\"";
+				DEVELOPMENT_TEAM = X2PQYA6S48;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.billdonner.pumperios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		887566312A1843A70030AE77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"pumperios/Preview Content\"";
+				DEVELOPMENT_TEAM = X2PQYA6S48;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.billdonner.pumperios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -289,6 +433,15 @@
 			buildConfigurations = (
 				887565E42A0882400030AE77 /* Debug */,
 				887565E52A0882400030AE77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8875662F2A1843A70030AE77 /* Build configuration list for PBXNativeTarget "pumperios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				887566302A1843A70030AE77 /* Debug */,
+				887566312A1843A70030AE77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
