@@ -1,0 +1,580 @@
+
+>Prompts url: https://billdonner.com/fs/gd/pumper-data.txt  (2319 bytes)
+>Contacting: https://api.openai.com/v1/completions
+
+
+
+>Prompt #001 2023-05-20 15:45:50 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate 5 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #001 2023-05-20 15:45:50 +0000 from chatGPT...2023-05-20 10:46:05.687988-0500 pumper[69098:23898286] [tcp] tcp_input [C1.1.1:3] flags=[R] seq=2741704044, ack=0, win=0 state=LAST_ACK rcv_nxt=2741704044, snd_una=688314918
+2023-05-20 10:46:05.688236-0500 pumper[69098:23898286] [tcp] tcp_input [C1.1.1:3] flags=[R] seq=2741704044, ack=0, win=0 state=CLOSED rcv_nxt=2741704044, snd_una=688314918
+........response #001 2023-05-20 15:45:50 +0000:
+
+let challenges = [
+    {
+        "id": "FSzkdlfz0031",
+        "generated": "2023-05-16 19:41:32 +0000",
+        "question": "Which of the following is a common feature of a domesticated dog?",
+        "topic": "Man's Best Friend",
+        "hint": "All of these are traits domestic dogs have developed.",
+        "answers": ["Albinism", "Ability to hunt small game", "Ability to understand human commands"],
+        "answer": "Ability to understand human commands",
+        "explanation": ["Dogs have developed an ability to understand and respond to simple commands, such as sit, heel, come, and lay down.", "Dogs have become used to living in human houses and being cared for by people, which helps build trust between humans and dogs.", "Dogs are bred selectivley, over generations, to may develop certain physical traits, such as fur color or body shape, but albinism is not a commonly found feature in domesticated dogs."],
+        "article": "https://www.dogingtonpost.com/characteristics-of-domesticated-dogs/",
+        "image": "https://www.pexels.com/photo/brown-dog-looking-at-camera-1599417/"
+    },
+    {
+        "id": "FSzkdlfz0031",
+        "generated": "2023-05-16 19:41:32 +0000",
+        "question": "Which type of breed was once used as a royal guard dog?",
+        "topic": "Man's Best Friend",
+        "hint": "This breed is usually larger and kept for protection.",
+        "answers": ["Shih Tzu", "Papillon", "Great Dane"],
+        "answer": "Great Dane",
+        "explanation": ["The Great Dane was originally bred in Germany in the early 1800s as a royal guard dog. The breed was originally called the German boarhound but was renamed the Great Dane in the late 1800s.", "The average Great Dane is much larger than other breeds and this made them ideal for guarding large properties, roaming grounds, and hunting large game.", "Unlike other breeds like Shih Tzu's and Papillon's which are usually kept as smaller, companion dogs, the Great Dane is a much bigger breed and is often kept for it's protective qualities."],
+        "article": "https://www.akc.org/breeds/great-dane/history-and-origin/",
+        "image": "https://www.pexels.com/photo/photo-of-black-great-dane-dog-looking-to-camera-3609420/"
+    },
+    {
+        "id": "FSzkdlfz0031",
+        "generated": "2023-05-16 19:41:32 +0000",
+        "question": "Which of the following traits is shared by many breeds of dogs?",
+        "topic": "Man's Best Friend",
+        "hint": "All of these traits have been bred into many types of dogs.",
+        "answers": ["Thick fur", "Ability to chase rabbits", "Ability to recognize colors"],
+        "answer": "Ability to chase rabbits",
+        "explanation": ["Many breeds of dogs have been bred to excel at chasing or hunting for small animals like rabbits.", "Dogs can sense smell much better than humans and have been bred to use this sense to track small animals over long distances.", "Both thick fur and the ability to recognize colors has been bred into some breeds of dogs, but it is not a common trait of many breeds together."],
+        "article": "https://pets.thenest.com/dogs-sense-smell-better-humans-4071.html",
+        "image": "https://www.pexels.com/photo/adult-brown-and-white-dog-laying-2869199/"
+    },
+    {
+        "id": "FSzkdlfz0031",
+        "generated": "2023-05-16 19:41:32 +0000",
+        "question": "What was the breed of the most famous service dog, 'Rin Tin Tin'?",
+        "topic": "Man's Best Friend",
+        "hint": "This breed is well known for their docile, loving personalities, but are also great at hunting.",
+        "answers": ["Labrador Retriever", "Greyhound", "German Shephard"],
+        "answer": "German Shephard",
+        "explanation": ["Rin Tin Tin was a German Shephard and the most famous service dog of his era. He was found in the battlefields of France in World War I and adopted by an American soldier.", "Rin Tin Tin became a war hero and was known for his bravery in battle, but also for his gentle and loving nature.", "Labradors and Greyhounds are both sweet and docile breeds, but neither is commonly known for being strong hunters like the German Shephard breed."],
+        "article": "https://www.akc.org/expert-advice/lifestyle/famous-service-dogs-rin-tin-tin/",
+        "image": "https://www.pexels.com/photo/black-and-brown-german-shepherd-1412426/"
+    },
+    {
+        "id": "FSzkdlfz0031",
+        "generated": "2023-05-16 19:41:32 +0000",
+        "question": "What does the concept of dog intelligence refer to?",
+        "topic": "Man's Best Friend",
+        "hint": "This is the measure of cognitive skills a dog has.",
+        "answers": ["How obedient a dog is", "How well a dog can learn tricks", "How well a dog understands their owner"],
+        "answer": "How well a dog can learn tricks",
+        "explanation": ["The concept of dog intelligence is a measure of the cognitive skills a dog has, such as the ability to learn new tricks, skills, and behaviors.", "Dog obedience is related to intelligence but is not a measure of cognitive skills, rather it is a measure of how well a dog can obey commands and stay focused when given instructions.", "A dog's understanding of their owner's wants and needs is also related to intelligence, but it not a measure of cognitive skills."],
+        "article": "https://www.cesarsway.com/dog-behavior/intelligent-dogs/the-intelligence-of-dogs",
+        "image": "https://www.pexels.com/photo/golden-retriever-dog-lying-down-playing-on-grass-field-805906/"
+    }
+]
+.
+>Prompt #002 2023-05-20 15:47:30 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #002 2023-05-20 15:47:30 +0000 from chatGPT...response #002 2023-05-20 15:47:30 +0000:
+
+[
+  {
+    "id": "FSzkdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "Which of these breeds of cats is actually hairless?",
+    "topic": "Freaky Felines",
+    "hint": "Not a 'furless' cat",
+    "answers": ["Sphynx", "Siamese", "American Shorthair"],
+    "answer": "Sphynx",
+    "explanation": [
+      "The sphynx is an unusual breed of cat that is actually hairless, as compared to 'furless' cats which are just cats with very short fur.",
+    ],
+    "article": "https://www.thesprucepets.com/all-about-the-sphynx-cat-559803",
+    "image": "https://cf.ltkcdn.net/cats/images/std/228371-425x282-Sphynx_cat.jpg"
+  }
+]
+.
+>Prompt #003 2023-05-20 15:47:50 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #003 2023-05-20 15:47:50 +0000 from chatGPT...response #003 2023-05-20 15:47:50 +0000:
+
+[
+  {
+    "id": "FSzkdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "Which of the following is NOT a wild cat?",
+    "topic": "Freaky Felines",
+    "hint": "This answer is found in the animal kingdom, domestically",
+    "answers": ["Mountain Lion", "Caracal", "Tabby Cat"],
+    "answer": "Tabby Cat",
+    "explanation": ["Tabby cats are domestic cats that have never been in the wild, making them a species of pet.",
+                     "Caracals, Mountain Lions, and other wild cats can be found in numerous places throughout the world."],
+    "article": "https://catladyworld.com/cats/the-big-difference-between-wild-and-domestic-cats/",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/07/Tabby_psychadelic_cat.jpg"
+  }
+]
+.>Prompts url: https://billdonner.com/fs/gd/pumper-data.txt  (2319 bytes)
+>Contacting: https://api.openai.com/v1/completions
+
+
+
+>Prompt #004 2023-05-20 15:48:10 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate 5 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #004 2023-05-20 15:48:10 +0000 from chatGPT...2023-05-20 10:48:26.076458-0500 pumper[69098:23901696] [tcp] tcp_input [C4.1.1:3] flags=[R] seq=464207160, ack=0, win=0 state=LAST_ACK rcv_nxt=464207160, snd_una=4242386328
+2023-05-20 10:48:26.076601-0500 pumper[69098:23901696] [tcp] tcp_input [C4.1.1:3] flags=[R] seq=464207160, ack=0, win=0 state=CLOSED rcv_nxt=464207160, snd_una=4242386328
+..response #004 2023-05-20 15:48:10 +0000:
+
+let challenges = [
+  {
+    id: "FSzkdlf0031",
+    generated: "2023-05-16 19:41:32 +0000",
+    question: "What is the most popular name given to male dogs in the United States?",
+    topic: "Man's Best Friend",
+    hint: "It's a human name",
+    answers: ["Max", "Charlie", "Buddy"],
+    answer: "Buddy",
+    explanation: ["Buddy is the most popular name given to male dogs in the United States, according to a 2019 survey by Rover.com.", "Almost one in five male dogs were named Buddy."],
+    article: "https://www.rover.com/blog/most-popular-dog-names-united-states/",
+    image: "https://source.unsplash.com/mwzvaVpgr3I/800x800"
+  },
+  {
+    id: "FSzkdlf0031",
+    generated: "2023-05-16 19:41:32 +0000",
+    question: "What is the most intelligent breed of dog, according to science?",
+    topic: "Man's Best Friend",
+    hint: "It's a canine name",
+    answers: ["Poodle", "Golden Retriever", "German Shepherd"],
+    answer: "Poodle",
+    explanation: ["The poodle is the most intelligent breed of dog, according to science. Massively popular in the United States, they have been here since the 19th century.", "A 2017 study by Stanley Coren in the Intelligence of Dogs showed that poodles ranked first in obedience and trainability."],
+    article: "https://www.vetstreet.com/our-pet-experts/7-facts-about-the-poodle#:~:text=The%20Poodle%20is%20one%20of,find%20across%20the%20breed%20types.",
+    image: "https://source.unsplash.com/dtyWvNjV2fA/800x800"
+  },
+  {
+    id: "FSzkdlf0031",
+    generated: "2023-05-16 19
+.
+>Prompt #005 2023-05-20 15:48:51 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #005 2023-05-20 15:48:51 +0000 from chatGPT......response #005 2023-05-20 15:48:51 +0000:
+
+[
+  {
+    "id": "FSzkdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "What type of wild cat is often cited as the biggest modern member of the Felidae family?",
+    "topic": "Freaky Felines",
+    "hint": "This wild cat is a favorite among big cat fanatics and can weigh up to 660 pounds!",
+    "answers": [
+      "Cheetah",
+      "Leopard",
+      "Tiger"
+    ],
+    "answer": "Tiger",
+    "explanation": ["The Tiger is the largest modern member of the Felidae family and it can weigh up to 660 pounds and measure up to 11 feet in length.", "It is also the national animal of India and is an endangered species, with only 3,890 wild tigers left in the world."],
+    "article": "https://www.interestinganimalfacts.net/tiger-facts/",
+    "image": "https://image.shutterstock.com/z/stock-photo-large-tiger-in-the-long-grass-india-182146338.jpg"
+  },
+  {
+    "id": "FSzkdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "What is the technical term used to describe a group of cats?",
+    "topic": "Freaky Felines",
+    "hint": "A group of kitties can be technically categorized in this way!",
+    "answers": [
+      "Pride",
+      "Clowder",
+      "Pack"
+    ],
+    "answer": "Clowder",
+    "explanation": ["Clowder, pronounced \"CLOW-Duhr\", is the technical term for a group of cats. A clowder can range from 3 cats to 30 cats and is also referred to as a mysterious of cats.", "In addition, a group of cats is also commonly referred to as a 'clutter' of cats."],
+    "article": "https://www.thoughtco.com/clowder-of-cats-556383",
+    "image": "https://image.shutterstock.com/z/stock-photo-colorful-pair-of-cat-heads-isolated-on-white-background-creative-illustration-188571385.jpg"
+  },
+  {
+    "id": "FSzkdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "What type of cat originates from Egypt?",
+    "topic": "Freaky Felines",
+    "hint": "This cat was often seen in ancient Egyptian hieroglyphs!",
+    "answers": [
+      "Siamese",
+      "Maine Coon",
+      "Egyptian Mau"
+    ],
+    "answer": "Egyptian Mau",
+    "explanation": ["The Egyptian Mau is a natural breed of domesticated cat that originated in Egypt. It is thought to be the oldest breed of domesticated cat, as it was often seen in ancient Egyptian hieroglyphs.", "Egyptian Maus today are known to be gentle, loving, and intelligent cats and can live up to 15-18 years in age."],
+    "article": "https://egyptianmausfromtutankhamunkennel.com/what-is-egyptian-mau/",
+    "image": "https://image.shutterstock.com/z/stock-photo-cute-egyptian-mau-cat-relaxes-on-a-blanket-1287560110.jpg"
+  }
+]
+.
+>Prompt #006 2023-05-20 15:49:41 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #006 2023-05-20 15:49:41 +0000 from chatGPT.......response #006 2023-05-20 15:49:41 +0000:
+
+let challenges = [
+    {
+     "id": "FSzkdlf0031",
+     "generated": "2023-05-16 19:41:32 +0000",
+     "question": "What type of cat is characterized by its folded ears and muscular body?",
+     "topic": "Freaky Felines",
+     "hint": "This breed originated in the United Kingdom",
+     "answers": ["Siamese","American Curl","British Shorthair"],
+     "answer": "British Shorthair",
+     "explanation": ["The British Shorthair is a big, resilient cat breed with an easy-going temperament. It's characteristic folded ears add distinctiveness to its already muscular body. This breed was first developed in the United Kingdom, which is a possible hint as to why this breed was the correct answer"],
+     "article": "https://www.animalwised.com/british-shorthair-cat-breed-characteristics-and-behavior-3209.html",
+     "image": "https://images.unsplash.com/photo-1503560638183-d78bf18e89cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+    },
+    {
+     "id": "FSzkdlf0031",
+     "generated": "2023-05-16 19:41:32 +0000",
+     "question": "What type of cat can fit through an opening the size of an orange?",
+     "topic": "Freaky Felines",
+     "hint": "This breed has a wildcat-like appearance",
+     "answers": ["American Bobtail","Sphynx","Manx"],
+     "answer": "Sphynx",
+     "explanation": ["The Sphynx cat is a breed of hairless cat that has a wildcat-like appearance. Despite its lack of fur, this cute kitty is known to be quite warm to the touch due to its loose skin and wrinkle covered body. The breed is known to be surprisingly agile and can fit through an opening as small as the size of an orange."],
+     "article": "https://www.petmd.com/cat/care/sphynx-cat-dispelling-myths-about-this-unique-breed",
+     "image": "https://images.unsplash.com/photo-1472325814111-ca3bc592585e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+    },
+   {
+     "id": "FSzkdlf0031",
+     "generated": "2023-05-16 19:41:32 +0000",
+     "question": "Which domestic cats may grow to resemble a large bobcat?",
+     "topic": "Freaky Felines",
+     "hint": "This breed is considered a 'natural' breed",
+     "answers": ["Siamese","American Curl","Maine Coon"],
+     "answer": "Maine Coon",
+     "explanation": ["The Maine Coon is a natural breed of domestic cat that is known for its giant size and bobcat-like appearance. As the largest breed of domestic cat, some Maine Coons may even be larger than some smaller breeds of dogs. Its tufted ears, long bushy tail, and shaggy coat all help to give it somewhat of a wild, bobcat-like look."],
+     "article": "https://www.petmd.com/cat/breeds/c_ct_maine_coon",
+     "image": "https://images.unsplash.com/photo-1550463319-2bc04f1775fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+   }
+]
+.>Prompts url: https://billdonner.com/fs/gd/pumper-data.txt  (2319 bytes)
+>Contacting: https://api.openai.com/v1/completions
+
+
+
+>Prompt #007 2023-05-20 15:50:41 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate 5 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #007 2023-05-20 15:50:41 +0000 from chatGPT...2023-05-20 10:50:56.320595-0500 pumper[69098:23905098] [tcp] tcp_input [C5.1.1:3] flags=[R] seq=1922823693, ack=0, win=0 state=LAST_ACK rcv_nxt=1922823693, snd_una=1302878189
+2023-05-20 10:50:56.320773-0500 pumper[69098:23905098] [tcp] tcp_input [C5.1.1:3] flags=[R] seq=1922823693, ack=0, win=0 state=CLOSED rcv_nxt=1922823693, snd_una=1302878189
+.....response #007 2023-05-20 15:50:41 +0000:
+
+[
+  {
+    id: 'FSzkdlf0031',
+    generated: '2023-05-16 19:41:32 +0000',
+    question: 'What sound does a dog make?',
+    topic: 'Man's Best Friend',
+    hint: 'Woof, woof, woof...',
+    answers: ['Meow', 'Bark', 'Woof'],
+    answer: 'Woof',
+    explanation: ['Dogs are typically known to bark as their primary form of communication.'],
+    article: 'https://www.thesprucepets.com/facts-about-dogs-barking-479548',
+    image: 'https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  },
+
+  {
+    id: 'FSzkdlf0031',
+    generated: '2023-05-16 19:41:32 +0000',
+    question: 'How old can a dog live to be?',
+    topic: 'Man's Best Friend',
+    hint: 'The life of a canine can be much longer than what you would expect...',
+    answers: ['2 years', '10 years', '20 years'],
+    answer: '20 years',
+    explanation: ['Many large breed dogs typically live to an average age of 10 to 12 years, while smaller breeds may live 15 to 18 years, and a very small few may live to a ripe old age of 20 years.'],
+    article: 'https://www.akc.org/expert-advice/health/how-long-do-dogs-live/',
+    image: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  },
+
+  {
+    id: 'FSzkdlf0031',
+    generated: '2023-05-16 19:41:32 +0000',
+    question: 'Which type of food do dogs typically eat?',
+    topic: 'Man's Best Friend',
+    hint: 'This type of food is designed to provide the perfect balance of nutrition for your pup',
+    answers: ['Vegetables', 'Fruits', 'Dog food'],
+    answer: 'Dog food',
+    explanation: ['Dog food provides your dog with the correct balance of proteins, carbohydrates, fats, vitamins, and minerals to ensure it stays healthy and active.'],
+    article: 'https://www.petmd.com/dog/nutrition/evr_dg_what_types_of_dog_food_are_there',
+    image: 'https://images.pexels.com/photos/997991/pexels-photo-997991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  },
+
+  {
+    id: 'FSzkdlf0031',
+    generated: '2023-05-16 19:41:32 +0000',
+    question: 'What is the most popular breed of dog?',
+    topic: 'Man's Best Friend',
+    hint: 'This breed has been around for hundreds of years.',
+    answers: ['Pug', 'Corgi', 'Labrador Retriever'],
+    answer: 'Labrador Retriever',
+    explanation: ['The Labrador Retriever has been the most popular breed of dog in the USA for over twenty-five years. This breed of dog is known for its gentleness, intelligence, and loyalty.'],
+    article: 'https://www.akc.org/dog-breeds/labrador-retriever/',
+    image: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  },
+
+  {
+    id: 'FSzkdlf0031',
+    generated: '2023-05-16 19:41:32 +0000',
+    question: 'Do dogs have different personalities?',
+    topic: 'Man's Best Friend',
+    hint: 'Yes, and no two dogs are the same.',
+    answers: ['No', 'Maybe', 'Yes'],
+    answer: 'Yes',
+    explanation: ['Just like people, dogs have their own individual personalities, temperaments, and preferences. Each dog is unique and can exhibit a variety of different behaviors.'],
+    article: 'https://www.petmd.com/dog/behavior/evr_dg_dog_personality',
+    image: 'https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  },
+]
+.
+>Prompt #008 2023-05-20 15:51:51 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #008 2023-05-20 15:51:51 +0000 from chatGPT.....response #008 2023-05-20 15:51:51 +0000:
+
+let Challenges = [{
+  "id": "FSzkdlf0031",
+  "generated": "2023-05-16 19:41:32 +0000",
+  "question": "What is the scientific name for a domestic cat?",
+  "topic": "Freaky Felines",
+  "hint": "Think Latin",
+  "answers": ["Panthera leo", "Analog Tiger", "Felis catus"],
+  "answer": "Felis catus",
+  "explanation": ["Felis catus is the scientific name of a domestic cat, from the Felis genus and the Cattus species"],
+  "article": "https://en.wikipedia.org/wiki/Cat",
+  "image": "https://www.example.com/image_of_cat.png"
+},
+{
+  "id": "FSzkdlf0031",
+  "generated": "2023-05-16 19:41:32 +0000",
+  "question": "What is the most common coat color of domestic cats?",
+  "topic": "Freaky Felines",
+  "hint": "Think of the most common color of cats you see",
+  "answers": ["Gray", "White", "Black"],
+  "answer": "Gray",
+  "explanation": ["Gray is the most common coat color of domestic cats due to the fact that it is a natural mutation of the tabby gene."],
+  "article": "https://en.wikipedia.org/wiki/Cat_coat_genetics",
+  "image": "https://www.example.com/image_of_gray_cat.png"
+},
+{
+  "id": "FSzkdlf0031",
+  "generated": "2023-05-16 19:41:32 +0000",
+  "question": "Which sense do cats rely on the most when hunting?",
+  "topic": "Freaky Felines",
+  "hint": "Which one would they miss most if it were gone?",
+  "answers": ["Taste", "Touch", "Hearing"],
+  "answer": "Hearing",
+  "explanation": ["Cats rely on their hearing the most when hunting as they are expert hunters due to their acute hearing and their ability to move in complete silence."],
+  "article": "https://www.vetbabble.com/cats/hunting-and-catching-prey-cats/",
+  "image": "https://www.example.com/image_of_cat_listening.png"
+}]
+.
+>Prompt #009 2023-05-20 15:52:31 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate  Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #009 2023-05-20 15:52:31 +0000 from chatGPT.....response #009 2023-05-20 15:52:31 +0000:
+
+let challenges = [{
+    "id": "FZSdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "What is a group of cats called?",
+    "topic": "Freaky Felines",
+    "hint": "It's not a herd!",
+    "answers": [
+      "A pack",
+      "A herd",
+      "A clowder"
+    ],
+    "answer": "A clowder",
+    "explanation": [
+      "A group of cats is called a 'clowder'."
+    ],
+    "article": "https://www.thesprucepets.com/what-is-a-group-of-cats-called-552038",
+    "image": "https://www.thesprucepets.com/thmb/3mKP94KbTRT3YSIIfL94l-PFf5I=/450x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/clowder-cats-GettyImages-856907100-57dfb2d93df78c3fa467a0f2.jpg"
+  },
+  {
+    "id": "FZSdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "What features are typical to cats, but not to most other mammals (except for other members of the cat family)?",
+    "topic": "Freaky Felines",
+    "hint": "Two features!",
+    "answers": [
+      "Claws and paws",
+      "Whiskers and fur",
+      "Eyes and ears"
+    ],
+    "answer": "Claws and paws",
+    "explanation": [
+      "Cats are well-known for the sharp claws and the soft protective padding on the bottom of their feet and their toes, which are unique among mammals, except for other members of the Felidae family."
+    ],
+    "article": "https://sciencing.com/difference-cat-other-mammals-4764353.html",
+    "image": "https://cdn.pixabay.com/photo/2018/10/01/19/08/cat-3717980_960_720.jpg"
+  },
+  {
+    "id": "FZSdlf0031",
+    "generated": "2023-05-16 19:41:32 +0000",
+    "question": "How many species of cats are there in the cat family, Felidae?",
+    "topic": "Freaky Felines",
+    "hint": "Roughly 30 species",
+    "answers": [
+      "10",
+      "30",
+      "50"
+    ],
+    "answer": "30",
+    "explanation": [
+      "The cat family, Felidae, includes roughly 30 species which are gathered into two subfamilies: Pantherinae (the big cats) and Felinae (the small cats)."
+    ],
+    "article": "https://www.livescience.com/27511-cats.html",
+    "image": "https://5.imimg.com/data5/IK/TQ/MY-11634567/tiger-250x250.jpg"
+  }
+  ]
+.>Prompts url: https://billdonner.com/fs/gd/pumper-data.txt  (2319 bytes)
+>Contacting: https://api.openai.com/v1/completions
+
+
+
+>Prompt #010 2023-05-20 15:53:11 +0000:
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let generated: String
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+/* Generate 5 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the generated to 2023-05-16 19:41:32 +0000 */
+
+>Awaiting response #010 2023-05-20 15:53:11 +0000 from chatGPT...2023-05-20 10:53:26.827894-0500 pumper[69098:23908041] [tcp] tcp_input [C6.1.1:3] flags=[R] seq=2993502377, ack=0, win=0 state=LAST_ACK rcv_nxt=2993502377, snd_una=845004350
+2023-05-20 10:53:26.830902-0500 pumper[69098:23908041] [tcp] tcp_input [C6.1.1:3] flags=[R] seq=2993502377, ack=0, win=0 state=CLOSED rcv_nxt=2993502377, snd_una=845004350
+..
