@@ -42,7 +42,7 @@ func callChapGPT(prompt:String,
     "temperature": 1.0
   ]
   request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
-  print("Prompt: \(prompt) \n\nawaiting response...\n\n")
+  print("Prompt: \(prompt) \n\n>awaiting response...",terminator:"")
   let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
     guard let data = data, error == nil else {
       print(error?.localizedDescription ?? "Unknown error")
@@ -63,6 +63,7 @@ func callChapGPT(prompt:String,
   if wait {
     while true   {
       sleep(1)
+      print(".",terminator: "")
       if respo != "" { break }
     }
   }
@@ -119,7 +120,7 @@ extension SplitFile {
     if let url = URL(string:url) {
       // Get the contents of the file.
       let contents = try String(contentsOf: url)
-      print("URL: \(contents.count) bytes")
+      print(">URL: \(contents.count) bytes")
       // Split the contents of the file into chunks using the pattern.
       let chunks = contents.split(separator: split_pattern)
       for chunk in chunks {
