@@ -8,6 +8,19 @@
 
 import Foundation
 
+struct Challenge : Decodable  {
+  let id : String
+  let idx: Int // index within json array
+  let timestamp: String // time and date when generated
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
 
 struct ChatGPTResponse: Codable {
   let choices: [ChatGPTChoice]
@@ -18,6 +31,65 @@ struct ChatGPTChoice: Codable {
 }
 
 let apiURL = "https://api.openai.com/v1/completions"
+var global_index = 0 // yes its global
+
+func standardSubstitutions(source:String)->String {
+  
+  let source0 = source.replacingOccurrences(of:"$INDEX", with: "\(global_index)") 
+  let source1 = source0.replacingOccurrences(of:"$NOW", with: "\(Date())")
+  let source2 = source1.replacingOccurrences(of: "$UUID", with: UUID().uuidString)
+  return source2 
+}
+
+func extractSubstringsInBrackets(input: String) -> [String] {
+  var matches: [String] = []
+  var completed: [Bool] = []
+  var idx = 0 // into matches
+  var inside = false
+  matches.append("")
+  completed.append(false)
+  for c in input {
+    switch c {
+    case "{":
+      if inside { continue }//fatalError("already inside")}
+      inside = true
+      matches [idx].append("{")
+      completed [idx] =  false
+    case "}":
+      if !inside {  continue }//fatalError("not inside")}
+      inside = false
+      matches [idx].append("}")
+      completed [idx] = true
+      idx += 1
+      matches.append("")
+      completed.append(false)
+      
+    default: if inside {
+      matches [idx].append(c)
+    }
+    }
+  }
+  if !completed[idx] {
+    matches.removeLast()
+  }
+  return matches.filter {
+    $0 != ""
+  }
+}
+func cleanup(string:String) -> [String] {
+  let jsons = extractSubstringsInBrackets(input: string)
+  return jsons//.joined(separator: ",")
+}
+func stripComments(source: String, commentStart: String) -> String {
+  let lines = source.split(separator: "\n")
+  var keeplines:[String] = []
+  for line in lines  {
+    if !line.hasPrefix(commentStart) {
+      keeplines += [String(line)]
+    }
+  }
+  return keeplines.joined(separator: "\n")
+}
 
 func callChapGPT(tag:String,
                  nodots:Bool,
@@ -42,7 +114,7 @@ func callChapGPT(tag:String,
   let parameters: [String: Any] = [
     "prompt": prompt,
     "model": "text-davinci-003",
-    "max_tokens": 1800,
+    "max_tokens": 2000,
     "top_p": 1,
     "frequency_penalty": 0,
     "presence_penalty": 0,
@@ -77,7 +149,7 @@ func callChapGPT(tag:String,
   }
 }
 #if os(iOS)
-
+/// the ios variant exists only for testing
 struct Pumper {
   
   var url: String = "https://billdonner.com/fs/gd/pumper-data.txt"
@@ -93,6 +165,8 @@ struct Pumper {
   var verbose = false
   
   var dontcall = false
+  
+  var jsonvalid = false
   
 }
 #else
@@ -132,74 +206,38 @@ struct Pumper: ParsableCommand {
   @Option(name: .shortAndLong, help: "Don't call AI")
   var dontcall: Bool = false
   
+  @Option(name: .shortAndLong, help: "Generate valid JSON for JSONLint")
+  var jsonValid: Bool = false
+  
 }
 
 #endif
 extension Pumper {
   func run() throws {
+    var first = true
     var tagval:Int = 0
     var fileHandle:FileHandle? = nil
     defer {
       if let fileHandle = fileHandle {
+        if jsonValid {
+          // only generate full valid json if requested
+          fileHandle.write("]".data(using: .utf8)!)
+        }
        try! fileHandle.close()
       }
     }
-
-    func extractSubstringsInBrackets(input: String) -> [String] {
-      var matches: [String] = []
-      var completed: [Bool] = []
-      var idx = 0 // into matches
-      var inside = false
-      matches.append("")
-      completed.append(false)
-      for c in input {
-        switch c {
-        case "{":
-          if inside { continue }//fatalError("already inside")}
-          inside = true
-          matches [idx].append("{")
-          completed [idx] =  false
-        case "}":
-          if !inside {  continue }//fatalError("not inside")}
-          inside = false
-          matches [idx].append("}")
-          completed [idx] = true
-          idx += 1
-          matches.append("")
-          completed.append(false)
-          
-        default: if inside {
-          matches [idx].append(c)
-        }
-        }
-      }
-      if !completed[idx] {
-        matches.removeLast()
-      }
-      return matches.filter {
-        $0 != ""
-      }
-    }
-    func cleanup(string:String) -> String {
-      let jsons = extractSubstringsInBrackets(input: string)
-      return jsons.joined(separator: ",") + ","
-    }
-    func stripComments(source: String, commentStart: String) -> String {
-      let lines = source.split(separator: "\n")
-      var keeplines:[String] = []
-      for line in lines  {
-        if !line.hasPrefix(commentStart) {
-          keeplines += [String(line)]
-        }
-      }
-      return keeplines.joined(separator: "\n")
-    }
     if let url = URL(string:url) {
+      print(">Pumper Command Line: \(CommandLine.arguments)")
+      print(">Pumper running at \(Date())\n")
       if output != "" {
         guard let outurl = URL(string:output) else {
           print("Bad output url") ; return
         }
        fileHandle = try FileHandle(forWritingTo: outurl)
+        if let fileHandle = fileHandle , jsonValid {
+          // only generate full valid json if requested
+          fileHandle.write("[".data(using: .utf8)!)
+        }
       }
       for idx in 1...`repeat` {
         // Get the contents of the file.
@@ -211,7 +249,9 @@ extension Pumper {
         // Split the contents of the file into chunks using the pattern.
         let chunks = contents.split(separator: split_pattern)
         for chunk in chunks {
-          let prompt = stripComments(source: String(chunk), commentStart: comments_pattern)
+          let prompt0 = stripComments(source: String(chunk), commentStart: comments_pattern)
+          let prompt = standardSubstitutions(source:prompt0) 
+          global_index += 1
           if prompt.count > 0 {
             tagval += 1
             let tag = String(format:"%03d",tagval) +  " \(Date())"
@@ -223,21 +263,34 @@ extension Pumper {
               try callChapGPT(tag:tag, nodots: nodots,
                               verbose:verbose ,prompt : prompt,
                               outputting:  { response in
-                let pref = "{ \"id:\""
+                let pref = "{ "
                 let cleaned = cleanup(string:   ((idx==1) ? pref : "") + response)
-                if verbose {
-                  print("\n>AI Response #\(tag):")
-                }
-                print("\n\(cleaned)")
-                if let fileHandle = fileHandle  {
-                  // append response
-                  fileHandle.write(cleaned.data(using: .utf8)!)
-                }
+               
+                  print("\n>AI Response #\(tag): \(cleaned.count) challenges returned ...")
+               
+                // check to make sure it's valid
+                for idx in 0..<cleaned.count {
+                  do {
+                    let _ = try JSONDecoder().decode(Challenge.self,from:cleaned[idx].data(using:.utf8)!)
+                    if let fileHandle = fileHandle  {
+                      // append response with prepended comma if we need one
+                      if !first {
+                        fileHandle.write(",".data(using: .utf8)!)
+                      } else {
+                        first = false
+                      }
+                      fileHandle.write(cleaned[idx].data(using: .utf8)!)
+                    }
+                  } catch {
+                    print(">Could not decode \(error), \n*** BAD JSON FOLLOWS***\n\(cleaned)\n>Continuing...")
+                  }
+                }// for loop
               }, wait:true)
             }
           }
         }
       }
+      return
     }
     else {
       print ("bad url")

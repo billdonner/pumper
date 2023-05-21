@@ -1,4 +1,5 @@
 ***
+///just one today mates
 //PROMPT consider the following structure
 struct Challenge   {
   let id : String
@@ -14,11 +15,20 @@ struct Challenge   {
   let image:String // URL of image of correct Answer
 }
 
-/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:32 +0000
- Do not include trailing commas in any of the JSON */
+/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question
+ 
+ on the Subject of Politicians ,
+ setting the topic to DirtBags
+ 
+ and the idx to $INDEX
+ and the id to $UUID
+ and the timestamp to $NOW
+ Do not include trailing commas in the answer or explanation arrays
+ Ensure all field names are enclosed in double-quotes */
 let challenge = [
   {
 ***
+///just one today mates
 //PROMPT consider the following structure
 struct Challenge   {
   let id : String
@@ -34,11 +44,21 @@ struct Challenge   {
   let image:String // URL of image of correct Answer
 }
 
-/* Generate 12 Challenges as an Array of JSON each with an interesting, pithy, question and  four answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:33 +0000
- Do not include trailing commas in any of the JSON */
+/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question
+ 
+ on the Subject of Famous Narcissists,
+ setting the topic to Famous Narcissists, Who Needs Them?
+ 
+ and the idx to $INDEX
+ and the id to $UUID
+ and the timestamp to $NOW
+ Do not include trailing commas in the answer or explanation arrays
+ Ensure all field names are enclosed in double-quotes */
 let challenge = [
   {
 ***
+***
+///just one today mates
 //PROMPT consider the following structure
 struct Challenge   {
   let id : String
@@ -54,9 +74,45 @@ struct Challenge   {
   let image:String // URL of image of correct Answer
 }
 
-/* Generate 7 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Frogs , setting the topic to Freaky Frogs and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:34 +0000
- Do not include trailing commas in any of the JSON */
+/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question
+ 
+ on the Subject of Dogs ,
+ setting the topic to Man's Best Friend
+ 
+ and the idx to $INDEX
+ and the id to $UUID
+ and the timestamp to $NOW
+ Do not include trailing commas in the answer or explanation arrays
+ Ensure all field names are enclosed in double-quotes */
 let challenge = [
   {
 ***
-///hopefully we ignore the end of comment lines 
+///just one today mates
+//PROMPT consider the following structure
+struct Challenge   {
+  let id : String
+  let idx: Int // index within json array
+  let timestamp: String // time and date when generated
+  let question: String
+  let topic: String
+  let hint:String // a hint to show if the user needs help
+  let answers: [String]
+  let answer: String // which answer is correct
+  let explanation: [String] // reasoning behind the correctAnswer
+  let article: String // URL of article about the correct Answer
+  let image:String // URL of image of correct Answer
+}
+
+/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question
+ 
+ on the Subject of Cats ,
+ setting the topic to Freaky
+ 
+ and the idx to $INDEX
+ and the id to $UUID
+ and the timestamp to $NOW
+ Do not include trailing commas in the answer or explanation arrays
+ Ensure all field names are enclosed in double-quotes */
+let challenge = [
+  {
+***
