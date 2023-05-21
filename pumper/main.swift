@@ -63,6 +63,7 @@ func callChapGPT(tag:String,
       outputting(respo)
     }  catch {
       print ("Failed to decode response ",error,respo)
+      return
     }
   }
   task.resume()
@@ -71,7 +72,7 @@ func callChapGPT(tag:String,
     while true   {
       if !nodots {print(".",terminator: "")}
       if respo != "" { break }
-      sleep(10)
+      sleep(1)
     }
   }
 }
@@ -99,7 +100,6 @@ struct Pumper {
 import ArgumentParser
 
 struct Pumper: ParsableCommand {
-  
   static let configuration = CommandConfiguration(
     abstract: "Split up a file of Prompts and pump them in to the AI Assistant",
     version: "0.1.1",
@@ -137,8 +137,6 @@ struct Pumper: ParsableCommand {
 #endif
 extension Pumper {
   func run() throws {
-    
-  
     var tagval:Int = 0
     var fileHandle:FileHandle? = nil
     defer {
@@ -175,13 +173,16 @@ extension Pumper {
         }
         }
       }
+      if !completed[idx] {
+        matches.removeLast()
+      }
       return matches.filter {
         $0 != ""
       }
     }
     func cleanup(string:String) -> String {
       let jsons = extractSubstringsInBrackets(input: string)
-      return jsons.joined(separator: ",")
+      return jsons.joined(separator: ",") + ","
     }
     func stripComments(source: String, commentStart: String) -> String {
       let lines = source.split(separator: "\n")
@@ -222,8 +223,8 @@ extension Pumper {
               try callChapGPT(tag:tag, nodots: nodots,
                               verbose:verbose ,prompt : prompt,
                               outputting:  { response in
-                let cleaned = cleanup(string: response)
-                
+                let pref = "{ \"id:\""
+                let cleaned = cleanup(string:   ((idx==1) ? pref : "") + response)
                 if verbose {
                   print("\n>AI Response #\(tag):")
                 }
@@ -241,7 +242,8 @@ extension Pumper {
     else {
       print ("bad url")
     }
-    sleep(120)
+    RunLoop.current.run() // suggested by fivestars blog
+    //sleep(120)
   }
 }
 #if os(iOS)

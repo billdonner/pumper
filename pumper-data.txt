@@ -14,10 +14,10 @@ struct Challenge   {
   let image:String // URL of image of correct Answer
 }
 
-/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:32 +0000 */
+/* Generate 15 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Dogs , setting the topic to Man's Best Friend and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:32 +0000
+ Do not include trailing commas in any of the JSON */
 let challenge = [
   {
-    "id":
 ***
 //PROMPT consider the following structure
 struct Challenge   {
@@ -34,10 +34,10 @@ struct Challenge   {
   let image:String // URL of image of correct Answer
 }
 
-/* Generate 12 Challenges as an Array of JSON each with an interesting, pithy, question and  four answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:33 +0000 */
+/* Generate 12 Challenges as an Array of JSON each with an interesting, pithy, question and  four answers and at least one explanation per question on the Subject of Cats , setting the topic to Freaky Felines and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:33 +0000
+ Do not include trailing commas in any of the JSON */
 let challenge = [
   {
-    "id":
 ***
 //PROMPT consider the following structure
 struct Challenge   {
@@ -54,9 +54,9 @@ struct Challenge   {
   let image:String // URL of image of correct Answer
 }
 
-/* Generate 7 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Frogs , setting the topic to Freaky Frogs and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:34 +0000 */
+/* Generate 7 Challenges as an Array of JSON each with an interesting, pithy, question and  three answers and at least one explanation per question on the Subject of Frogs , setting the topic to Freaky Frogs and the id to FSzkdlf0031 and the timestamp to 2023-05-16 19:41:34 +0000
+ Do not include trailing commas in any of the JSON */
 let challenge = [
   {
-    "id":
 ***
 ///hopefully we ignore the end of comment lines 
