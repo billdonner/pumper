@@ -8,6 +8,9 @@
 
 import Foundation
 
+let a = "‘"
+let b = "'"
+
 struct Challenge : Decodable  {
   let id : String
   let idx: Int // index within json array
@@ -122,10 +125,15 @@ func callChapGPT(tag:String,
   ]
   request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
   if verbose {
-    print("\n>Prompt #\(tag): \n\(prompt) \n\n>Awaiting response #\(tag) from chatGPT.",terminator:"")
+    print("\n>Prompt #\(tag): \n\(prompt) \n\n>Awaiting response #\(tag) from AI.",terminator:"")
   }
+  else {
+    print("\n>Prompt #\(tag): Awaiting response from AI.",terminator:"")
+  }
+  
   let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
     guard let data = data, error == nil else {
+      print("*** Network error communicating with AI ***")
       print(error?.localizedDescription ?? "Unknown error")
       return
     }
@@ -134,7 +142,7 @@ func callChapGPT(tag:String,
       respo  = response.choices.first?.text ?? "<<nothin>>"
       outputting(respo)
     }  catch {
-      print ("Failed to decode response ",error,respo)
+      print ("*** Failed to decode response from AI ***",error,respo)
       return
     }
   }
@@ -260,13 +268,14 @@ extension Pumper {
               print(prompt)
               sleep(3)
             } else {
+              let start_time = Date()
               try callChapGPT(tag:tag, nodots: nodots,
                               verbose:verbose ,prompt : prompt,
                               outputting:  { response in
                 let pref = "{ "
                 let cleaned = cleanup(string:   ((idx==1) ? pref : "") + response)
-               
-                  print("\n>AI Response #\(tag): \(cleaned.count) challenges returned ...")
+               var counted = 0
+              
                
                 // check to make sure it's valid
                 for idx in 0..<cleaned.count {
@@ -280,11 +289,14 @@ extension Pumper {
                         first = false
                       }
                       fileHandle.write(cleaned[idx].data(using: .utf8)!)
+                      counted += 1
                     }
                   } catch {
-                    print(">Could not decode \(error), \n*** BAD JSON FOLLOWS***\n\(cleaned)\n>Continuing...")
+                    print(">Could not decode \(error), \n>*** BAD JSON FOLLOWS ***\n\(cleaned[idx])\n>*** END BAD JSON,Continuing...\n")
                   }
                 }// for loop
+                let elapsed = Date().timeIntervalSince(start_time)
+                print("\n>AI Response #\(tag): \(counted)/\(cleaned.count) challenges returned in \(elapsed) secs  ...")
               }, wait:true)
             }
           }

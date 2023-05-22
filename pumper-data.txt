@@ -24,7 +24,8 @@ struct Challenge   {
  and the id to $UUID
  and the timestamp to $NOW
  Do not include trailing commas in the answer or explanation arrays
- Ensure all field names are enclosed in double-quotes */
+ Ensure all field names are enclosed in double-quotes
+Translate "‘" to "'" within field values*/
 let challenge = [
   {
 ***
@@ -53,7 +54,9 @@ struct Challenge   {
  and the id to $UUID
  and the timestamp to $NOW
  Do not include trailing commas in the answer or explanation arrays
- Ensure all field names are enclosed in double-quotes */
+ Ensure all field names are enclosed in double-quotes
+ Ensure that answer field is not an array
+ Translate "‘" to "'" within field values */
 let challenge = [
   {
 ***
@@ -83,7 +86,9 @@ struct Challenge   {
  and the id to $UUID
  and the timestamp to $NOW
  Do not include trailing commas in the answer or explanation arrays
- Ensure all field names are enclosed in double-quotes */
+ Ensure all field names are enclosed in double-quotes
+  Ensure that answer field is not an array
+ Translate "‘" to "'" within field values */
 let challenge = [
   {
 ***
@@ -112,7 +117,9 @@ struct Challenge   {
  and the id to $UUID
  and the timestamp to $NOW
  Do not include trailing commas in the answer or explanation arrays
- Ensure all field names are enclosed in double-quotes */
+ Ensure all field names are enclosed in double-quotes
+  Ensure that answer field is not an array
+ Translate "‘" to "'" within field values */
 let challenge = [
   {
 ***
