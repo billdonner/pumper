@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 struct Challenge : Decodable  {
   let id : String
   let idx: Int // index within json array
@@ -16,8 +17,8 @@ struct Challenge : Decodable  {
   let topic: String
   let hint:String // a hint to show if the user needs help
   let answers: [String]
-  let answer: String // which answer is correct
-  let explanation: [String] // reasoning behind the correctAnswer
+  let correct: String // which answer is correct
+  let explanation: String // reasoning behind the correctAnswer
   let article: String // URL of article about the correct Answer
   let image:String // URL of image of correct Answer
 }
@@ -33,12 +34,21 @@ struct ChatGPTChoice: Codable {
 let apiURL = "https://api.openai.com/v1/completions"
 var global_index = 0 // yes its global
 
+func generateFileName(prefixPath:String) -> String {
+  let date = Date()
+  let formatter = DateFormatter()
+  formatter.dateFormat = "yyyyMMdd_HHmmss"
+  let dateString = formatter.string(from: date)
+  let fileName = prefixPath + "_" + dateString //+ ".txt"
+  return fileName
+}
+
 func standardSubstitutions(source:String)->String {
   
-  let source0 = source.replacingOccurrences(of:"$INDEX", with: "\(global_index)") 
+  let source0 = source.replacingOccurrences(of:"$INDEX", with: "\(global_index)")
   let source1 = source0.replacingOccurrences(of:"$NOW", with: "\(Date())")
   let source2 = source1.replacingOccurrences(of: "$UUID", with: UUID().uuidString)
-  return source2 
+  return source2
 }
 
 func extractSubstringsInBrackets(input: String) -> [String] {
@@ -107,7 +117,7 @@ func callChapGPT(tag:String,
   request.httpMethod = "POST"
   request.setValue("application/json", forHTTPHeaderField: "Content-Type")
   request.setValue("Bearer " + apiKey, forHTTPHeaderField: "Authorization")
-  request.timeoutInterval = 180 //yikes
+  request.timeoutInterval = 240//yikes
   
   var respo:String = ""
   
@@ -132,6 +142,7 @@ func callChapGPT(tag:String,
     guard let data = data, error == nil else {
       print("*** Network error communicating with AI ***")
       print(error?.localizedDescription ?? "Unknown error")
+      print("*** continuing ***\n")
       respo = " " // a hack to bust out of wait loop below
       return
     }
@@ -141,6 +152,7 @@ func callChapGPT(tag:String,
       outputting(respo)
     }  catch {
       print ("*** Failed to decode response from AI ***",respo,error)
+      print("*** continuing ***\n")
       return
     }
   }
@@ -149,10 +161,12 @@ func callChapGPT(tag:String,
   
   // linger here if asked to wait
   if wait {
+    var cycle = 0
     while true   {
-      if !nodots {print(".",terminator: "")}
+      if !nodots {print("\(cycle)",terminator: "")}
       if respo != "" { break }
       sleep(10)
+      cycle = (cycle+1) % 10
     }
   }
 }
@@ -231,7 +245,7 @@ extension Pumper {
           // only generate full valid json if requested
           fileHandle.write("]".data(using: .utf8)!)
         }
-       try! fileHandle.close()
+        try! fileHandle.close()
       }
     }
     
@@ -242,95 +256,114 @@ extension Pumper {
         guard let outurl = URL(string:output) else {
           print("Bad output url") ; return
         }
-        fileHandle = try FileHandle(forWritingTo: outurl)
-        if let fileHandle = fileHandle , jsonValid {
-          // only generate full valid json if requested
-          fileHandle.write("[".data(using: .utf8)!)
+        guard  output.hasPrefix("file://") else
+        {
+          print("Only local files supported"); return
         }
+        
+        let s = outurl.deletingPathExtension().absoluteString.dropFirst(7)
+        let x = generateFileName(prefixPath: String(s)) + "." + outurl.pathExtension
+        if (FileManager.default.createFile(atPath: String(x), contents: nil, attributes: nil)) {
+          print("\(x) created successfully.")
+        } else {
+          print("\(x) not created.")
+        }
+        let newurl = URL(string:x) // should be good
+        if let newurl = newurl {
+          fileHandle = try FileHandle(forWritingTo: newurl)
+          if let fileHandle = fileHandle , jsonValid {
+            // only generate full valid json if requested
+            fileHandle.write("[".data(using: .utf8)!)
+          }
+        }
+          else {
+            print("\(x) is a bad url")
+          }
+        }
+        
+        while true {
+          // keep doing this forever for now
+          do {
+            for idx in 1...`repeat` {
+              // Get the contents of the file.
+              let contents = try String(contentsOf: url)
+              if idx == 1 && verbose {
+                print(">Prompts url: \(url)  (\(contents.count) bytes)")
+                print(">Contacting: \(apiURL)\n\n")
+              }
+              // Split the contents of the file into chunks using the pattern.
+              let chunks = contents.split(separator: split_pattern)
+              for chunk in chunks {
+                let prompt0 = stripComments(source: String(chunk), commentStart: comments_pattern)
+                let prompt = standardSubstitutions(source:prompt0)
+                global_index += 1
+                if prompt.count > 0 {
+                  tagval += 1
+                  let tag = String(format:"%03d",tagval) +  " "//\(Date())"
+                  if dontcall {
+                    print("\n>Deliberately not calling AI for prompt #\(tag):")
+                    print(prompt)
+                    sleep(3)
+                  } else {
+                    let start_time = Date()
+                    do {
+                      try callChapGPT(tag:tag, nodots: nodots,
+                                      verbose:verbose ,prompt : prompt,
+                                      outputting:  { response in
+                        
+                        let cleaned = cleanup(string:   ((idx==1) ? "{ " : "") + response)
+                        var counted = 0
+                        // check to make sure it's valid
+                        for idx in 0..<cleaned.count {
+                          do {
+                            let _ = try JSONDecoder().decode(Challenge.self,from:cleaned[idx].data(using:.utf8)!)
+                            if let fileHandle = fileHandle  {
+                              // append response with prepended comma if we need one
+                              if !first {
+                                fileHandle.write(",".data(using: .utf8)!)
+                              } else {
+                                first = false
+                              }
+                              fileHandle.write(cleaned[idx].data(using: .utf8)!)
+                              counted += 1
+                            }
+                          } catch {
+                            print(">Could not decode \(error), \n>*** BAD JSON FOLLOWS ***\n\(cleaned[idx])\n>*** END BAD JSON ***\n")
+                            print("*** continuing ***\n")
+                          }
+                        }// for loop
+                        let elapsed = Date().timeIntervalSince(start_time)
+                        print("\n>AI Response #\(tag): \(counted)/\(cleaned.count) challenges returned in \(elapsed) secs  ...")
+                      }, wait:true)
+                      // did not throw
+                    } catch {
+                      // if callChapGPT throws we end up here and just print a message and continu3
+                      let elapsed = Date().timeIntervalSince(start_time)
+                      print("\n>AI Response #\(tag): ***ERROR \(error) no challenges returned in \(elapsed) secs  ...")
+                    }
+                  }// chatgpt was called
+                  
+                }
+                
+              }
+            }
+          } // do
+          catch {
+            print( "\n***DESPITE ERRORS< WE ARE CONTINUING \(error)" )
+          }
+          print("BOTTOM OF WHILE LOOP")
+        } // end while true
+      }
+      else {
+        print ("bad url")
       }
       
-      while true {
-        // keep doing this forever for now
-        do {
-          for idx in 1...`repeat` {
-            // Get the contents of the file.
-            let contents = try String(contentsOf: url)
-            if idx == 1 && verbose {
-              print(">Prompts url: \(url)  (\(contents.count) bytes)")
-              print(">Contacting: \(apiURL)\n\n")
-            }
-            // Split the contents of the file into chunks using the pattern.
-            let chunks = contents.split(separator: split_pattern)
-            for chunk in chunks {
-              let prompt0 = stripComments(source: String(chunk), commentStart: comments_pattern)
-              let prompt = standardSubstitutions(source:prompt0)
-              global_index += 1
-              if prompt.count > 0 {
-                tagval += 1
-                let tag = String(format:"%03d",tagval) +  " \(Date())"
-                if dontcall {
-                  print("\n>Deliberately not calling AI for prompt #\(tag):")
-                  print(prompt)
-                  sleep(3)
-                } else {
-                  let start_time = Date()
-                  do {
-                    try callChapGPT(tag:tag, nodots: nodots,
-                                    verbose:verbose ,prompt : prompt,
-                                    outputting:  { response in
-                      
-                      let cleaned = cleanup(string:   ((idx==1) ? "{ " : "") + response)
-                      var counted = 0
-                      // check to make sure it's valid
-                      for idx in 0..<cleaned.count {
-                        do {
-                          let _ = try JSONDecoder().decode(Challenge.self,from:cleaned[idx].data(using:.utf8)!)
-                          if let fileHandle = fileHandle  {
-                            // append response with prepended comma if we need one
-                            if !first {
-                              fileHandle.write(",".data(using: .utf8)!)
-                            } else {
-                              first = false
-                            }
-                            fileHandle.write(cleaned[idx].data(using: .utf8)!)
-                            counted += 1
-                          }
-                        } catch {
-                          print(">Could not decode \(error), \n>*** BAD JSON FOLLOWS ***\n\(cleaned[idx])\n>*** END BAD JSON,Continuing...\n")
-                        }
-                      }// for loop
-                      let elapsed = Date().timeIntervalSince(start_time)
-                      print("\n>AI Response #\(tag): \(counted)/\(cleaned.count) challenges returned in \(elapsed) secs  ...")
-                    }, wait:true)
-                    // did not throw
-                  } catch {
-                    // if callChapGPT throws we end up here and just print a message and continu3
-                    let elapsed = Date().timeIntervalSince(start_time)
-                    print("\n>AI Response #\(tag): ***ERROR \(error) no challenges returned in \(elapsed) secs  ...")
-                  }
-                }// chatgpt was called
-                 
-              }
-               
-            }
-          }
-        } // do
-        catch {
-         print( "\n***DESPITE ERRORS< WE ARE CONTINUING \(error)" )
-        }
-        print("BOTTOM OF WHILE LOOP")
-      } // end while true
+      RunLoop.current.run() // suggested by fivestars blog
+      //sleep(120)
     }
-    else {
-      print ("bad url")
-    }
-      
-    RunLoop.current.run() // suggested by fivestars blog
-    //sleep(120)
   }
-}
 #if os(iOS)
-try Pumper().run()
+  try Pumper().run()
 #else
-Pumper.main()
+  Pumper.main()
 #endif

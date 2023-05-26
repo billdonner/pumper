@@ -171,6 +171,8 @@
 			mainGroup = 887565D32A0882400030AE77;
 			packageReferences = (
 				887565E62A0882810030AE77 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				88B0B1E92A1FE5B400909EF7 /* XCRemoteSwiftPackageReference "swift-tools-support-core" */,
+				88B0B1F02A1FE69100909EF7 /* XCRemoteSwiftPackageReference "swift-system" */,
 			);
 			productRefGroup = 887565DD2A0882400030AE77 /* Products */;
 			projectDirPath = "";
@@ -450,6 +452,22 @@
 		887565E62A0882810030AE77 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		88B0B1E92A1FE5B400909EF7 /* XCRemoteSwiftPackageReference "swift-tools-support-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-tools-support-core.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.2;
+			};
+		};
+		88B0B1F02A1FE69100909EF7 /* XCRemoteSwiftPackageReference "swift-system" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-system.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
