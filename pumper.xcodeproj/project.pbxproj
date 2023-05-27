@@ -36,6 +36,7 @@
 		887566282A1843A50030AE77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8875662A2A1843A70030AE77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8875662D2A1843A70030AE77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		88B0B20F2A212B1600909EF7 /* JSON-ISSUES.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "JSON-ISSUES.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				887565DF2A0882400030AE77 /* main.swift */,
+				88B0B20F2A212B1600909EF7 /* JSON-ISSUES.md */,
 			);
 			path = pumper;
 			sourceTree = "<group>";
