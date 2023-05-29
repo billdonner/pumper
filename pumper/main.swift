@@ -7,6 +7,9 @@
 // this runs on ios for experimentation only, its a mac program really
 import Darwin
 import Foundation
+import q20kshare
+
+
 var pumpCount = 0
 var badJsonCount = 0
 var networkGlitches = 0
@@ -15,19 +18,6 @@ var tagval:Int = 0
 var global_index = 0
 var fileHandle:FileHandle? = nil
 
-struct Challenge : Decodable  {
-  let id : String
-  let idx: Int // index within json array
-  let timestamp: String // time and date when generated
-  let question: String
-  let topic: String
-  let hint:String // a hint to show if the user needs help
-  let answers: [String]
-  let correct: String // which answer is correct
-  let explanation: String // reasoning behind the correctAnswer
-  let article: String // URL of article about the correct Answer
-  let image:String // URL of image of correct Answer
-}
 
 struct ChatGPTResponse: Codable {
   let choices: [ChatGPTChoice]
@@ -381,3 +371,4 @@ try Pumper().run()
 Pumper.main()
 #endif
 
+print(">Pumper Exiting Normally - Pumped:\(pumpCount)" + " Bad Json: \( badJsonCount)" + " Network Issues: \(networkGlitches)\n")

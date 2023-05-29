@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884DDEA62A241D4700DD138F /* q20kshare in Frameworks */ = {isa = PBXBuildFile; productRef = 884DDEA52A241D4700DD138F /* q20kshare */; };
 		887565E02A0882400030AE77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887565DF2A0882400030AE77 /* main.swift */; };
 		887565E82A0882810030AE77 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 887565E72A0882810030AE77 /* ArgumentParser */; };
 		887566272A1843A50030AE77 /* pumperiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887566262A1843A50030AE77 /* pumperiosApp.swift */; };
@@ -44,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				884DDEA62A241D4700DD138F /* q20kshare in Frameworks */,
 				887565E82A0882810030AE77 /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +124,7 @@
 			name = pumper;
 			packageProductDependencies = (
 				887565E72A0882810030AE77 /* ArgumentParser */,
+				884DDEA52A241D4700DD138F /* q20kshare */,
 			);
 			productName = pumper;
 			productReference = 887565DC2A0882400030AE77 /* pumper */;
@@ -175,6 +178,7 @@
 				887565E62A0882810030AE77 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				88B0B1E92A1FE5B400909EF7 /* XCRemoteSwiftPackageReference "swift-tools-support-core" */,
 				88B0B1F02A1FE69100909EF7 /* XCRemoteSwiftPackageReference "swift-system" */,
+				884DDEA42A241D4700DD138F /* XCRemoteSwiftPackageReference "q20kshare" */,
 			);
 			productRefGroup = 887565DD2A0882400030AE77 /* Products */;
 			projectDirPath = "";
@@ -451,6 +455,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		884DDEA42A241D4700DD138F /* XCRemoteSwiftPackageReference "q20kshare" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/billdonner/q20kshare";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		887565E62A0882810030AE77 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
@@ -478,6 +490,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		884DDEA52A241D4700DD138F /* q20kshare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 884DDEA42A241D4700DD138F /* XCRemoteSwiftPackageReference "q20kshare" */;
+			productName = q20kshare;
+		};
 		887565E72A0882810030AE77 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 887565E62A0882810030AE77 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
