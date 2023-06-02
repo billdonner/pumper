@@ -265,7 +265,10 @@ extension Pumper {
                                                   + response)
        
         handleAIResponse(cleaned )// if not good then pumpCount not
-        assert(cleaned.count > 0)
+        if cleaned.count == 0 {
+          print("\n>AI Response #\(tag): no challenges  \n")
+          return 
+        }
         let elapsed = Date().timeIntervalSince(start_time)
         print("\n>AI Response #\(tag): \(pumpCount-start_count)/\(cleaned.count) challenges returned in \(elapsed) secs\n")
         if pumpCount >= max {
