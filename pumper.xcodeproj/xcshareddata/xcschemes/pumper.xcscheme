@@ -96,6 +96,13 @@
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "$OPENAI_API_KEY"
+            value = "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"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
