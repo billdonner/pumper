@@ -97,9 +97,9 @@ func callChapGPT(tag:String,
                  outputting: @escaping (String)->Void ,wait:Bool = false ) throws
 {
     
-  let  looky = ProcessInfo.processInfo.environment["$OPENAI_API_KEY"]
-  guard let apiKey = looky  else { fatalError("$OPENAI_API_KEY not found in environment") }
-  print("Using apikey: " + apiKey)
+  let  looky = ProcessInfo.processInfo.environment["OPENAI_API_KEY"]
+  guard let apiKey = looky  else { fatalError("OPENAI_API_KEY not found in environment") }
+  print(">Pumper Using apikey: " + apiKey)
   guard let url = URL(string: apiURL) else {
     fatalError("Invalid API URL")
   }

@@ -30,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		881FE8542A2BA58E00FE3847 /* testopenai.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = testopenai.py; sourceTree = "<group>"; };
 		884DDEAB2A242C9B00DD138F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		887565DC2A0882400030AE77 /* pumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pumper; sourceTree = BUILT_PRODUCTS_DIR; };
 		887565DF2A0882400030AE77 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		887565D32A0882400030AE77 = {
 			isa = PBXGroup;
 			children = (
+				881FE8542A2BA58E00FE3847 /* testopenai.py */,
 				884DDEAB2A242C9B00DD138F /* README.md */,
 				887565DE2A0882400030AE77 /* pumper */,
 				887566252A1843A50030AE77 /* pumperios */,
