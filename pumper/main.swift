@@ -96,9 +96,10 @@ func callChapGPT(tag:String,
                  prompt:String,
                  outputting: @escaping (String)->Void ,wait:Bool = false ) throws
 {
-  
-  let apiKey = "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"
-  
+    
+  let  looky = ProcessInfo.processInfo.environment["$OPENAI_API_KEY"]
+  guard let apiKey = looky  else { fatalError("$OPENAI_API_KEY not found in environment") }
+  print("Using apikey: " + apiKey)
   guard let url = URL(string: apiURL) else {
     fatalError("Invalid API URL")
   }
@@ -267,7 +268,7 @@ extension Pumper {
         handleAIResponse(cleaned )// if not good then pumpCount not
         if cleaned.count == 0 {
           print("\n>AI Response #\(tag): no challenges  \n")
-          return 
+          return
         }
         let elapsed = Date().timeIntervalSince(start_time)
         print("\n>AI Response #\(tag): \(pumpCount-start_count)/\(cleaned.count) challenges returned in \(elapsed) secs\n")
