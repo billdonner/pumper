@@ -9,7 +9,8 @@ import Darwin
 import Foundation
 import q20kshare
 
-
+var apiKey = ""
+var aiURL: URL?
 var pumpCount = 0
 var badJsonCount = 0
 var networkGlitches = 0
@@ -27,7 +28,7 @@ struct ChatGPTChoice: Codable {
   let text: String
 }
 
-let apiURL = "https://api.openai.com/v1/completions"
+let aiURLString = "https://api.openai.com/v1/completions"
 
 func generateFileName(prefixPath:String) -> String {
   let date = Date()
@@ -90,21 +91,17 @@ func stripComments(source: String, commentStart: String) -> String {
   }
   return keeplines.joined(separator: "\n")
 }
-func callChapGPT(tag:String,
+func callChapGPT(outputURL:URL,
+                 tag:String,
                  nodots:Bool,
                  verbose:Bool,
                  prompt:String,
                  outputting: @escaping (String)->Void ,wait:Bool = false ) throws
 {
     
-  let  looky = ProcessInfo.processInfo.environment["OPENAI_API_KEY"]
-  guard let apiKey = looky  else { fatalError("OPENAI_API_KEY not found in environment") }
-  print(">Pumper Using apikey: " + apiKey)
-  guard let url = URL(string: apiURL) else {
-    fatalError("Invalid API URL")
-  }
+
   
-  var request = URLRequest(url: url)
+  var request = URLRequest(url: outputURL)
   request.httpMethod = "POST"
   request.setValue("application/json", forHTTPHeaderField: "Content-Type")
   request.setValue("Bearer " + apiKey, forHTTPHeaderField: "Authorization")
@@ -143,9 +140,11 @@ func callChapGPT(tag:String,
       respo  = response.choices.first?.text ?? "<<nothin>>"
       outputting(respo)
     }  catch {
-      print ("*** Failed to decode response from AI ***",respo,error)
+      print ("*** Failed to decode response from AI ***",error)
+      print (respo)
       networkGlitches += 1
       print("*** continuing ***\n")
+      respo = " " // a hack to bust out of wait loop below
       return
     }
   }
@@ -252,12 +251,12 @@ extension Pumper {
     }
   }
   
-  fileprivate func callTheAI(_ tag: String, _ prompt: String, _ idx: Int) {
+  fileprivate func callTheAI(_ outputURL:URL,_ tag: String, _ prompt: String, _ idx: Int) {
     // going to call the ai
     let start_time = Date()
     do {
       let start_count = pumpCount
-      try callChapGPT(tag:tag, nodots: nodots,
+      try callChapGPT(outputURL:outputURL, tag:tag, nodots: nodots,
                       verbose:verbose ,prompt : prompt,
                       outputting:  { response in
         
@@ -297,7 +296,7 @@ extension Pumper {
       let s = outurl.deletingPathExtension().absoluteString.dropFirst(7)
       let x = generateFileName(prefixPath: String(s)) + "." + outurl.pathExtension
       if (FileManager.default.createFile(atPath: String(x), contents: nil, attributes: nil)) {
-        print("\(x) created successfully.")
+        print(">Pumper created \(x)")
       } else {
         print("\(x) not created."); return
       }
@@ -330,15 +329,22 @@ extension Pumper {
       
     }
     print(">Pumper Command Line: \(CommandLine.arguments)")
-    print(">Pumper running at \(Date())\n")
+    print(">Pumper running at \(Date())")
     guard let url = URL(string:url) else {  print ("bad url"); return  }
     let contents = try String(contentsOf: url)
     let templates = contents.split(separator: split_pattern)
     if  verbose {
-      print(">Prompts url: \(url)  (\(contents.count) bytes, \(templates.count) chunks")
-      print(">Contacting: \(apiURL)\n\n")
+      print(">Prompts url: \(url)  (\(contents.count) bytes, \(templates.count) templates)")
+      print(">Contacting: \(aiURLString)")
     }
-    
+    let  looky = ProcessInfo.processInfo.environment["OPENAI_API_KEY"]
+    guard looky != nil   else { fatalError("OPENAI_API_KEY not found in environment") }
+    apiKey = looky!
+    print(">Pumper Using apikey: " + apiKey)
+    guard let url = URL(string: aiURLString) else {
+      fatalError("Invalid API URL")
+    }
+    aiURL = url
     prepOutputChannels()
     while pumpCount<=max {
       // keep doing until we hit user defined limit
@@ -357,7 +363,7 @@ extension Pumper {
             if dontcall {
               dontCallTheAI(tag, prompt, global_index)
             } else {
-              callTheAI(tag, prompt, global_index)
+              callTheAI(aiURL!,tag, prompt, global_index)
             }
           }
         }// for
