@@ -202,16 +202,16 @@ struct Pumper: ParsableCommand {
   @Option(name: .shortAndLong, help: "How many prompts to create")
   var max: Int = 65535
   
-  @Option(name: .shortAndLong, help: "Don't print dots whilst waiting")
-  var nodots: Bool = true
+  @Option(name: .shortAndLong, help: "Print dots whilst awaiting AI")
+  var dots: Bool = false
   
   @Option(name: .shortAndLong, help: "Print a lot more")
-  var verbose: Bool = true
+  var verbose: Bool = false
   
   @Option(name: .shortAndLong, help: "Don't call AI")
   var dontcall: Bool = false
   
-  @Option(name: .shortAndLong, help: "Generate valid JSON for Prepper")
+ // @Option(name: .shortAndLong, help: "Generate valid JSON for Prepper")
   var jsonValid: Bool = true
   
 }
@@ -256,7 +256,7 @@ extension Pumper {
     let start_time = Date()
     do {
       let start_count = pumpCount
-      try callChapGPT(outputURL:outputURL, tag:tag, nodots: nodots,
+      try callChapGPT(outputURL:outputURL, tag:tag, nodots: !dots,
                       verbose:verbose ,prompt : prompt,
                       outputting:  { response in
         
