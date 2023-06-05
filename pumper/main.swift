@@ -162,19 +162,7 @@ func callChapGPT(outputURL:URL,
     }
   }
 }
-#if os(iOS)
-/// the ios variant exists only for testing
-struct Pumper {
-  var url: String = "https://billdonner.com/fs/gd/pumper-data.txt"
-  var split_pattern = "***"
-  var comments_pattern = "///"
-  var max =  65535
-  var nodots = true
-  var verbose = false
-  var dontcall = false
-  var jsonvalid = false
-}
-#else
+
 
 import ArgumentParser
 
@@ -208,7 +196,7 @@ struct Pumper: ParsableCommand {
   @Option(name: .shortAndLong, help: "Print a lot more")
   var verbose: Bool = false
   
-  @Option(name: .shortAndLong, help: "Don't call AI")
+ // @Option(name: .shortAndLong, help: "Don't call AI")
   var dontcall: Bool = false
   
  // @Option(name: .shortAndLong, help: "Generate valid JSON for Prepper")
@@ -216,7 +204,6 @@ struct Pumper: ParsableCommand {
   
 }
 
-#endif
 
 extension Pumper {
   fileprivate func dontCallTheAI(_ tag: String, _ prompt: String, _ index:Int) {

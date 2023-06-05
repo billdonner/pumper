@@ -80,15 +80,11 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-v false"
-            isEnabled = "NO">
+            argument = "-v true"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-j false "
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--nodots false"
+            argument = "--dots true"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -96,6 +92,13 @@
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OPENAI_API_KEY"
+            value = "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"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
