@@ -1,6 +1,8 @@
 # PUMPER - Read a script and Pump thru ChatGPT
 
 Freeport.Software - in development
+
+June 6, 7:20PM
 ```
 OVERVIEW: Split up a file of Prompts and pump them in to the AI Assistant
 
