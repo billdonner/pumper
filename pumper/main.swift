@@ -216,7 +216,7 @@ extension Pumper {
     // check to make sure it's valid and write to output file
     for idx in 0..<cleaned.count {
       do {
-        let _ = try JSONDecoder().decode(Challenge.self,from:cleaned[idx].data(using:.utf8)!)
+        let aireturns = try JSONDecoder().decode(AIReturns.self,from:cleaned[idx].data(using:.utf8)!)
         if let fileHandle = fileHandle  {
           // append response with prepended comma if we need one
           if !first {
@@ -224,7 +224,15 @@ extension Pumper {
           } else {
             first = false
           }
-          fileHandle.write(cleaned[idx].data(using: .utf8)!)
+          // rewrite as a Challenge and write that out
+          let challenge:Challenge = aireturns.toChallenge()
+          let encoder = JSONEncoder()
+          encoder.outputFormatting = .prettyPrinted
+          let data = try encoder.encode(challenge)
+          let str = String(data:data,encoding: .utf8)
+          if let str = str {
+            fileHandle.write(str.data(using: .utf8)!)
+          }
           pumpCount += 1
           if pumpCount >= max {
             break
