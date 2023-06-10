@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		882FFB402A33FAD90038E9A8 /* subs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882FFB3F2A33FAD90038E9A8 /* subs.swift */; };
+		882FFB422A33FF9A0038E9A8 /* callAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882FFB412A33FF9A0038E9A8 /* callAI.swift */; };
 		884DDEA62A241D4700DD138F /* q20kshare in Frameworks */ = {isa = PBXBuildFile; productRef = 884DDEA52A241D4700DD138F /* q20kshare */; };
 		887565E02A0882400030AE77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887565DF2A0882400030AE77 /* main.swift */; };
 		887565E82A0882810030AE77 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 887565E72A0882810030AE77 /* ArgumentParser */; };
@@ -25,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		882FFB3F2A33FAD90038E9A8 /* subs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = subs.swift; sourceTree = "<group>"; };
+		882FFB412A33FF9A0038E9A8 /* callAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = callAI.swift; sourceTree = "<group>"; };
 		884DDEAB2A242C9B00DD138F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		887565DC2A0882400030AE77 /* pumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pumper; sourceTree = BUILT_PRODUCTS_DIR; };
 		887565DF2A0882400030AE77 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				887565DF2A0882400030AE77 /* main.swift */,
+				882FFB412A33FF9A0038E9A8 /* callAI.swift */,
+				882FFB3F2A33FAD90038E9A8 /* subs.swift */,
 				88B0B20F2A212B1600909EF7 /* JSON-ISSUES.md */,
 			);
 			path = pumper;
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				882FFB402A33FAD90038E9A8 /* subs.swift in Sources */,
 				887565E02A0882400030AE77 /* main.swift in Sources */,
+				882FFB422A33FF9A0038E9A8 /* callAI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
