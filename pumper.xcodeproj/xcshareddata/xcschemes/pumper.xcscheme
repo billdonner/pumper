@@ -56,16 +56,24 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "***"
+            argument = "file:///Users/billdonner/Desktop/pumper"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "///"
+            argument = "--dots true"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--output file:///Users/billdonner/Desktop/pumper-output-data.json"
+            argument = "--verbose true"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--split_pattern ***"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--comments_pattern ///"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--max 12"
@@ -80,18 +88,17 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-v true"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--dots true"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
             argument = "--help"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OPENAI_API_KEY"
+            value = "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"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

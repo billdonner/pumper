@@ -11,20 +11,24 @@ import q20kshare
 
 var apiKey = ""
 var aiURL: URL?
-var pumpCount = 0
-var badJsonCount = 0
-var networkGlitches = 0
+
 var first = true
 var tagval:Int = 0
 var global_index = 0
 var jsonOutHandle:FileHandle? = nil
 var promptLogHandle:FileHandle? = nil
 
+
+var pumpCount = 0
+var badJsonCount = 0
+var networkGlitches = 0
+
 enum PumperError: Error {
   case badInputURL
   case badOutputURL
   case cantWrite
   case noAPIKey
+  case onlyLocalFilesSupported
 }
 
 import ArgumentParser
@@ -61,6 +65,7 @@ struct Pumper: ParsableCommand {
   
   // @Option(name: .shortAndLong, help: "Don't call AI")
   var dontcall: Bool = false
+
  
   fileprivate func dontCallTheAI(_ tag: String, _ prompt: String, _ index:Int) {
     print("\n>Deliberately not calling AI for prompt #\(tag):\n")
@@ -68,7 +73,8 @@ struct Pumper: ParsableCommand {
     //sleep(3)
   }
   
-  fileprivate func prep(_ x:String, initial:String) throws  -> FileHandle? {
+  fileprivate func prepOutputChannels() throws {
+      func prep(_ x:String, initial:String) throws  -> FileHandle? {
     if (FileManager.default.createFile(atPath: x, contents: nil, attributes: nil)) {
       print(">Pumper created \(x)")
     } else {
@@ -79,22 +85,19 @@ struct Pumper: ParsableCommand {
     }
     do {
       let  fh = try FileHandle(forWritingTo: newurl)
-   
         fh.write(initial.data(using: .utf8)!)
-     
       return fh
     } catch {
       print("Cant write to \(newurl), \(error)"); throw PumperError.cantWrite
     }
   }
   
-  fileprivate func prepOutputChannels() throws {
     guard let outurl = URL(string:output) else {
       print("Bad output url") ; return
     }
     guard  output.hasPrefix("file://") else
     {
-      print("Only local files supported"); return
+      throw PumperError.onlyLocalFilesSupported
     }
     let s = String(outurl.deletingPathExtension().absoluteString.dropFirst(7))
     let x = generateFileNameForJSON(prefixPath:s)
@@ -108,6 +111,29 @@ struct Pumper: ParsableCommand {
     if let fileHandle = fh , let suf = suffix {
       fileHandle.write(suf.data(using: .utf8)!)
       try! fileHandle.close()
+    }
+  }
+  
+  fileprivate func pumpItUp(_ templates: [String.SubSequence]) {
+    while pumpCount<=max {
+      // keep doing until we hit user defined limit
+      do {
+        for t in templates {
+          guard pumpCount < max else { break }
+          let prompt0 = stripComments(source: String(t), commentStart: comments_pattern)
+          let prompt = standardSubstitutions(source:prompt0)
+          global_index += 1
+          if prompt.count > 0 {
+            tagval += 1
+            let tag = String(format:"%03d",tagval) +  "-\(pumpCount)" + "-\( badJsonCount)" + "-\(networkGlitches)"
+            if dontcall {
+              dontCallTheAI(tag, prompt, global_index)
+            } else {
+              callTheAI(pumper: self, aiURL!,tag, prompt, global_index)
+            }
+          }
+        }// for
+      }
     }
   }
   
@@ -135,33 +161,15 @@ struct Pumper: ParsableCommand {
     }
     aiURL = url
     try prepOutputChannels()
-    while pumpCount<=max {
-      // keep doing until we hit user defined limit
-      do {
-        for t in templates {
-          guard pumpCount < max else { break }
-          let prompt0 = stripComments(source: String(t), commentStart: comments_pattern)
-          let prompt = standardSubstitutions(source:prompt0)
-          global_index += 1
-          if prompt.count > 0 {
-            tagval += 1
-            let tag = String(format:"%03d",tagval) +  "-\(pumpCount)" + "-\( badJsonCount)" + "-\(networkGlitches)"
-            if dontcall {
-              dontCallTheAI(tag, prompt, global_index)
-            } else {
-              callTheAI(pumper: self, aiURL!,tag, prompt, global_index)
-            }
-          }
-        }// for
-      }
-    } // end pumpcount<=max
+    pumpItUp(templates) // end pumpcount<=max
     if pumpCount < max  {
       RunLoop.current.run() // suggested by fivestars blog
     }
-    print(">Pumper Exiting Normally - Pumped:\(pumpCount)" + " Bad Json: \( badJsonCount)" + " Network Issues: \(networkGlitches)\n")
+    
+      print(">Pumper Exiting Normally - Pumped:\(pumpCount)" + " Bad Json: \( badJsonCount)" + " Network Issues: \(networkGlitches)\n")
   }// otherwise we should exit
 }
 
 Pumper.main()
 
-print(">Pumper Exiting Normally - Pumped:\(pumpCount)" + " Bad Json: \( badJsonCount)" + " Network Issues: \(networkGlitches)\n")
+
