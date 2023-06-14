@@ -2,7 +2,7 @@
 
 Freeport.Software - in development
 
-June 6, 7:20PM
+0.1.1
 ```
 OVERVIEW: Split up a file of Prompts and pump them in to the AI Assistant
 
