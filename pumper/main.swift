@@ -35,14 +35,14 @@ import ArgumentParser
 
 struct Pumper: ParsableCommand {
   static let configuration = CommandConfiguration(
-    abstract: "Split up a file of Prompts and pump them in to the AI Assistant",
+    abstract: "Split up a script file of Prompts and pump them in to the AI\n\n version 0.1.3",
     version: "0.1.3",
     subcommands: [],
     defaultSubcommand: nil,
     helpNames: [.long, .short]
   )
   
-  @Argument(help: "The url of the Sparky file to pump")
+  @Argument(help: "The url of input script")
   var url: String
   
   @Argument( help:"Output file for AI JSON utterances")

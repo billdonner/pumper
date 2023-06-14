@@ -1,27 +1,26 @@
 # PUMPER - Read a script and Pump thru ChatGPT
 
 Freeport.Software - in development
-
-0.1.1
 ```
-OVERVIEW: Split up a file of Prompts and pump them in to the AI Assistant
+OVERVIEW: Split up a script file of Prompts and pump them in to the AI
 
-USAGE: pumper <url> <split_pattern> <comments_pattern> --output <output> [--max <max>] [--nodots <nodots>] [--verbose <verbose>] [--dontcall <dontcall>] [--json-valid <json-valid>]
+ version 0.1.3
+
+USAGE: pumper <url> <output> [--split_pattern <split_pattern>] [--comments_pattern <comments_pattern>] [--max <max>] [--dots <dots>] [--verbose <verbose>]
 
 ARGUMENTS:
-  <url>                   The url of the Sparky file to split
-  <split_pattern>         The pattern to use to split the file
-  <comments_pattern>      The pattern to use to indicate a comments line
+  <url>                   The url of input script
+  <output>                Output file for AI JSON utterances
 
 OPTIONS:
-  --output <output>       Output file for AI JSON utterances
-  -m, --max <max>         How many prompts to create (default: 65535)
-  -n, --nodots <nodots>   Don't print dots whilst waiting (default: true)
-  -v, --verbose <verbose> Print a lot more (default: true)
-  -d, --dontcall <dontcall>
-                          Don't call AI (default: false)
-  -j, --json-valid <json-valid>
-                          Generate valid JSON for Prepper (default: true)
+  --split_pattern <split_pattern>
+                          The pattern to use to split the file (default: ***)
+  --comments_pattern <comments_pattern>
+                          The pattern to use to indicate a comments line
+                          (default: ///)
+  --max <max>             How many prompts to create (default: 65535)
+  --dots <dots>           Print dots whilst awaiting AI (default: false)
+  -v, --verbose <verbose> Print a lot more (default: false)
   --version               Show the version.
   -h, --help              Show help information.
   ```
