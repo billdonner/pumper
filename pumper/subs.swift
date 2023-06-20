@@ -16,20 +16,22 @@ struct ChatGPTChoice: Codable {
 
 let aiURLString = "https://api.openai.com/v1/completions"
 
-func generateFileNameForJSON(prefixPath:String) -> String {
+func generateFileNameForJSON(prefixPath:String,veracity:Bool = false ) -> String {
   let date = Date()
   let formatter = DateFormatter()
   formatter.dateFormat = "yyyyMMdd_HHmmss"
   let dateString = formatter.string(from: date)
-  let fileName = prefixPath + "-out-" + dateString + ".json"
+  let fileName = prefixPath + (veracity ? "-veracityout-" : "-out-")
+  + dateString + ".json"
   return fileName
 }
-func generateFileNameForPromptsLog(prefixPath:String) -> String {
+func generateFileNameForPromptsLog(prefixPath:String,veracity:Bool = false ) -> String {
   let date = Date()
   let formatter = DateFormatter()
   formatter.dateFormat = "yyyyMMdd_HHmmss"
   let dateString = formatter.string(from: date)
-  let fileName = prefixPath + "-log-" + dateString + ".txt"
+  let fileName = prefixPath + (veracity ?  "-veracitylog-" : "-log-")
+  + dateString + ".txt"
   return fileName
 }
 

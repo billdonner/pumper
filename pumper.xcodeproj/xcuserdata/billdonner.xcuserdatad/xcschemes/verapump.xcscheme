@@ -52,11 +52,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "https://billdonner.com/fs/gd/pumper-input-data.txt"
+            argument = "file:///Users/billdonner/Desktop/fs/prepper-main-out-prompts.txt"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "file:///Users/billdonner/Desktop/fs/prepper-main-in.json"
+            argument = "file:///Users/billdonner/Desktop/fs/prepper-veracity-in.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -68,7 +68,15 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--unique false "
+            argument = "--unique false"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--veracity true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--max 500"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
