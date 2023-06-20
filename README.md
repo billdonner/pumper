@@ -4,7 +4,7 @@ Freeport.Software - in development
 ```
 OVERVIEW: Split up a script file of Prompts and pump them in to the AI
 
- version 0.1.3
+ version 0.1.4
 
 USAGE: pumper <url> <output> [--split_pattern <split_pattern>] [--comments_pattern <comments_pattern>] [--max <max>] [--dots <dots>] [--verbose <verbose>]
 
