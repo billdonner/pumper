@@ -10,6 +10,8 @@
 		882FFB402A33FAD90038E9A8 /* subs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882FFB3F2A33FAD90038E9A8 /* subs.swift */; };
 		882FFB422A33FF9A0038E9A8 /* callAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882FFB412A33FF9A0038E9A8 /* callAI.swift */; };
 		8844C6F92A40DB7B00A88E42 /* ter02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844C6F82A40DB7B00A88E42 /* ter02.swift */; };
+		8844C71A2A479D8A00A88E42 /* veracitystuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844C7192A479D8A00A88E42 /* veracitystuff.swift */; };
+		8844C71C2A479DA800A88E42 /* pumperstuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844C71B2A479DA800A88E42 /* pumperstuff.swift */; };
 		884DDEA62A241D4700DD138F /* q20kshare in Frameworks */ = {isa = PBXBuildFile; productRef = 884DDEA52A241D4700DD138F /* q20kshare */; };
 		887565E02A0882400030AE77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887565DF2A0882400030AE77 /* main.swift */; };
 		887565E82A0882810030AE77 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 887565E72A0882810030AE77 /* ArgumentParser */; };
@@ -32,6 +34,8 @@
 		882FFB412A33FF9A0038E9A8 /* callAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = callAI.swift; sourceTree = "<group>"; };
 		8844C6F62A40DB7B00A88E42 /* ter02.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ter02.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8844C6F82A40DB7B00A88E42 /* ter02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ter02.swift; sourceTree = "<group>"; };
+		8844C7192A479D8A00A88E42 /* veracitystuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = veracitystuff.swift; sourceTree = "<group>"; };
+		8844C71B2A479DA800A88E42 /* pumperstuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pumperstuff.swift; sourceTree = "<group>"; };
 		884DDEAB2A242C9B00DD138F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		887565DC2A0882400030AE77 /* pumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pumper; sourceTree = BUILT_PRODUCTS_DIR; };
 		887565DF2A0882400030AE77 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 			children = (
 				887565DF2A0882400030AE77 /* main.swift */,
 				882FFB412A33FF9A0038E9A8 /* callAI.swift */,
+				8844C7192A479D8A00A88E42 /* veracitystuff.swift */,
+				8844C71B2A479DA800A88E42 /* pumperstuff.swift */,
 				882FFB3F2A33FAD90038E9A8 /* subs.swift */,
 				88B0B20F2A212B1600909EF7 /* JSON-ISSUES.md */,
 			);
@@ -204,8 +210,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				882FFB402A33FAD90038E9A8 /* subs.swift in Sources */,
+				8844C71A2A479D8A00A88E42 /* veracitystuff.swift in Sources */,
 				887565E02A0882400030AE77 /* main.swift in Sources */,
 				882FFB422A33FF9A0038E9A8 /* callAI.swift in Sources */,
+				8844C71C2A479DA800A88E42 /* pumperstuff.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
