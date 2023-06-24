@@ -8,8 +8,40 @@
 import Foundation
 import q20kshare
 
+func callTheAINormal(ctx:ChatContext,prompt: String ) {
 
-func handleAIResponseNormal(ctx:ChatContext,_ cleaned: [String]) {
+  // going to call the ai
+  let start_time = Date()
+  do {
+    let start_count = ctx.pumpCount
+    try callChatGPT(ctx:ctx,
+                    prompt : prompt,
+                    outputting:  { response in
+      
+      let cleaned = extractSubstringsInBrackets(input: "{ "  + response)
+   
+        handleAIResponseNormal(ctx:ctx, cleaned )
+    // if not good then pumpCount not
+      if cleaned.count == 0 {
+        print("\n>AI Response #\(ctx.tag): no challenges  \n")
+        return
+      }
+      ctx.pumpCount += 1
+      let elapsed = Date().timeIntervalSince(start_time)
+      print("\n>AI Response #\(ctx.tag): \(ctx.pumpCount-start_count)/\(cleaned.count) challenges returned in \(elapsed) secs\n")
+      if ctx.pumpCount >= ctx.max {
+        Pumper.exit()
+      }
+    }, wait:true)
+    // did not throw
+  } catch {
+    // if callChapGPT throws we end up here and just print a message and continu3
+    let elapsed = Date().timeIntervalSince(start_time)
+    print("\n>AI Response #\(ctx.tag): ***ERROR \(error) no challenges returned in \(elapsed) secs\n")
+  }
+}
+
+fileprivate func handleAIResponseNormal(ctx:ChatContext,_ cleaned: [String]) {
   func handleNormalMode(ctx:ChatContext,item:String ) throws {
    // 1. verify we got a proper AIReturns json
    let aireturns = try JSONDecoder().decode(AIReturns.self,from:item.data(using:.utf8)!)
@@ -47,4 +79,66 @@ func handleAIResponseNormal(ctx:ChatContext,_ cleaned: [String]) {
     }
   }
 }
+func  prepOutputChannels(ctx:ChatContext)throws {
+   func prep(_ x:String, initial:String) throws  -> FileHandle? {
+     if (FileManager.default.createFile(atPath: x, contents: nil, attributes: nil)) {
+       print(">Pumper created \(x)")
+     } else {
+       print("\(x) not created."); throw PumpingErrors.badOutputURL
+     }
+     guard let  newurl = URL(string:x)  else {
+       print("\(x) is a bad url"); throw PumpingErrors.badOutputURL
+     }
+     do {
+       let  fh = try FileHandle(forWritingTo: newurl)
+       fh.write(initial.data(using: .utf8)!)
+       return fh
+     } catch {
+       print("Cant write to \(newurl), \(error)"); throw PumpingErrors.cantWrite
+     }
+   }
+   
+
+  guard  ctx.outURL.absoluteString.hasPrefix("file://") else
+   {
+     throw PumpingErrors.onlyLocalFilesSupported
+   }
+  let s = String(ctx.outURL.deletingPathExtension().absoluteString.dropFirst(7))
+   let x = s + ".json"
+   jsonOutHandle = try prep(x,initial:"[")
+ }
  
+ 
+
+public func pumpItUpNormal(ctx:ChatContext, templates: [String]) throws {
+  
+
+  try prepOutputChannels(ctx:ctx)
+  while ctx.pumpCount<=ctx.max {
+    // keep doing until we hit user defined limit
+      for (idx,t) in templates.enumerated() {
+        guard ctx.pumpCount < ctx.max else { break }
+        let prompt0 = stripComments(source: String(t), commentStart: ctx.comments_pattern)
+        if t.count > 0 {
+          let prompt = standardSubstitutions(source:prompt0,stats:ctx)
+     
+          if prompt.count > 0 {
+            ctx.global_index += 1
+            ctx.tag = String(format:"%03d",ctx.global_index) +  "-\(ctx.pumpCount)" + "-\( ctx.badJsonCount)" + "-\(ctx.networkGlitches)"
+            if ctx.dontcall {
+              dontCallTheAI(ctx:ctx, prompt: prompt)
+            } else {
+             // switch ctx.style {
+             // case PumpStyle.validator:
+             //   callTheAIVeracity(ctx:ctx, prompt:  prompt )
+             // case PumpStyle.promptor:
+                callTheAINormal(ctx: ctx, prompt: prompt)
+              //}
+            }
+          }
+        } else {
+          print("Warning - empty template #\(idx)")
+        }
+      }// for
+    }
+  }
