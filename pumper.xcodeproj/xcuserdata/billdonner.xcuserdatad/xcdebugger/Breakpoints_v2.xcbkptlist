@@ -125,9 +125,9 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "handleVeracityMode(_:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "getOpinion(_:)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -173,9 +173,9 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "handleAIResponse(_:_:)"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "handleNormalMode(_:)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -189,9 +189,9 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "handleAIResponse(_:_:)"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "handleNormalMode(_:)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -333,9 +333,9 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "handleVeracityMode(_:)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "getOpinion(_:)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -381,8 +381,8 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "callTheAI(pumper:_:_:_:_:_:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -397,8 +397,8 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "callChapGPT(pumper:outputURL:tag:prompt:outputting:wait:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -413,74 +413,10 @@
             filePath = "pumper/callAI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "callTheAI(pumper:_:_:_:_:_:)"
             landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "374DEE9A-5249-4178-8F61-2382C61AC484"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pumper/callAI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "getOpinion(_:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F52BC792-7E64-4408-B529-D0DE8F674BBC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pumper/callAI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "getOpinion(_:)"
-            landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "F52BC792-7E64-4408-B529-D0DE8F674BBC - ffa2c8db8744aef8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "pumper.getOpinion(Swift.String) throws -&gt; Swift.Optional&lt;q20kshare.Opinion&gt;"
-                  moduleName = "pumper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/billdonner/Documents/pumper/pumper/callAI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "143"
-                  endingLineNumber = "143"
-                  offsetFromSymbolStart = "1216">
-               </Location>
-               <Location
-                  uuid = "F52BC792-7E64-4408-B529-D0DE8F674BBC - ffa2c8db8744aef8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "pumper.getOpinion(Swift.String) throws -&gt; Swift.Optional&lt;q20kshare.Opinion&gt;"
-                  moduleName = "pumper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/billdonner/Documents/pumper/pumper/callAI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "143"
-                  endingLineNumber = "143"
-                  offsetFromSymbolStart = "1264">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
