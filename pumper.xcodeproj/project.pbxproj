@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8844C6F92A40DB7B00A88E42 /* ter02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844C6F82A40DB7B00A88E42 /* ter02.swift */; };
-		8844C71A2A479D8A00A88E42 /* veracitystuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844C7192A479D8A00A88E42 /* veracitystuff.swift */; };
 		8844C71C2A479DA800A88E42 /* pumperstuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844C71B2A479DA800A88E42 /* pumperstuff.swift */; };
 		884DDEA62A241D4700DD138F /* q20kshare in Frameworks */ = {isa = PBXBuildFile; productRef = 884DDEA52A241D4700DD138F /* q20kshare */; };
 		887565E02A0882400030AE77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887565DF2A0882400030AE77 /* main.swift */; };
@@ -28,9 +26,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8844C6F62A40DB7B00A88E42 /* ter02.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ter02.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8844C6F82A40DB7B00A88E42 /* ter02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ter02.swift; sourceTree = "<group>"; };
-		8844C7192A479D8A00A88E42 /* veracitystuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = veracitystuff.swift; sourceTree = "<group>"; };
 		8844C71B2A479DA800A88E42 /* pumperstuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pumperstuff.swift; sourceTree = "<group>"; };
 		884DDEAB2A242C9B00DD138F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		887565DC2A0882400030AE77 /* pumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pumper; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,13 +33,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8844C6F32A40DB7B00A88E42 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		887565D92A0882400030AE77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,20 +45,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8844C6F72A40DB7B00A88E42 /* ter02 */ = {
-			isa = PBXGroup;
-			children = (
-				8844C6F82A40DB7B00A88E42 /* ter02.swift */,
-			);
-			path = ter02;
-			sourceTree = "<group>";
-		};
 		887565D32A0882400030AE77 = {
 			isa = PBXGroup;
 			children = (
 				884DDEAB2A242C9B00DD138F /* README.md */,
 				887565DE2A0882400030AE77 /* pumper */,
-				8844C6F72A40DB7B00A88E42 /* ter02 */,
 				887565DD2A0882400030AE77 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				887565DC2A0882400030AE77 /* pumper */,
-				8844C6F62A40DB7B00A88E42 /* ter02.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				887565DF2A0882400030AE77 /* main.swift */,
-				8844C7192A479D8A00A88E42 /* veracitystuff.swift */,
 				8844C71B2A479DA800A88E42 /* pumperstuff.swift */,
 			);
 			path = pumper;
@@ -97,23 +74,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8844C6F52A40DB7B00A88E42 /* ter02 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8844C6FC2A40DB7B00A88E42 /* Build configuration list for PBXNativeTarget "ter02" */;
-			buildPhases = (
-				8844C6F22A40DB7B00A88E42 /* Sources */,
-				8844C6F32A40DB7B00A88E42 /* Frameworks */,
-				8844C6F42A40DB7B00A88E42 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ter02;
-			productName = ter02;
-			productReference = 8844C6F62A40DB7B00A88E42 /* ter02.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		887565DB2A0882400030AE77 /* pumper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 887565E32A0882400030AE77 /* Build configuration list for PBXNativeTarget "pumper" */;
@@ -145,9 +105,6 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					8844C6F52A40DB7B00A88E42 = {
-						CreatedOnToolsVersion = 14.3.1;
-					};
 					887565DB2A0882400030AE77 = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -173,35 +130,15 @@
 			projectRoot = "";
 			targets = (
 				887565DB2A0882400030AE77 /* pumper */,
-				8844C6F52A40DB7B00A88E42 /* ter02 */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		8844C6F42A40DB7B00A88E42 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		8844C6F22A40DB7B00A88E42 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8844C6F92A40DB7B00A88E42 /* ter02.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		887565D82A0882400030AE77 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8844C71A2A479D8A00A88E42 /* veracitystuff.swift in Sources */,
 				887565E02A0882400030AE77 /* main.swift in Sources */,
 				8844C71C2A479DA800A88E42 /* pumperstuff.swift in Sources */,
 			);
@@ -210,46 +147,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		8844C6FA2A40DB7B00A88E42 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X2PQYA6S48;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.billdonner.ter02;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		8844C6FB2A40DB7B00A88E42 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X2PQYA6S48;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.billdonner.ter02;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		887565E12A0882400030AE77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -390,15 +287,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8844C6FC2A40DB7B00A88E42 /* Build configuration list for PBXNativeTarget "ter02" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8844C6FA2A40DB7B00A88E42 /* Debug */,
-				8844C6FB2A40DB7B00A88E42 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		887565D72A0882400030AE77 /* Build configuration list for PBXProject "pumper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

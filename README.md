@@ -1,6 +1,6 @@
 # PUMPER - Read a script and Pump thru ChatGPT
 
-Freeport.Software - in development
+Freeport.Software - 0.1.5
 ```
 OVERVIEW: Split up a script file of Prompts and pump them in to the AI
 

@@ -8,8 +8,7 @@
 import Foundation
 import q20kshare
 
-func callTheAINormal(ctx:ChatContext,prompt: String,jsonOut:FileHandle? ) {
-
+func callTheAI(ctx:ChatContext,prompt: String,jsonOut:FileHandle? ) {
   // going to call the ai
   let start_time = Date()
   do {
@@ -20,7 +19,7 @@ func callTheAINormal(ctx:ChatContext,prompt: String,jsonOut:FileHandle? ) {
       
       let cleaned = extractSubstringsInBrackets(input: "{ "  + response)
    
-      handleAIResponseNormal(ctx:ctx, cleaned:cleaned, jsonOut:jsonOut )
+      handleAIResponse(ctx:ctx, cleaned:cleaned, jsonOut:jsonOut )
     // if not good then pumpCount not
       if cleaned.count == 0 {
         print("\n>AI Response #\(ctx.tag): no challenges  \n")
@@ -41,7 +40,7 @@ func callTheAINormal(ctx:ChatContext,prompt: String,jsonOut:FileHandle? ) {
   }
 }
 
-fileprivate func handleAIResponseNormal(ctx:ChatContext,cleaned: [String],jsonOut:FileHandle?) {
+func handleAIResponse(ctx:ChatContext,cleaned: [String],jsonOut:FileHandle?) {
   func handleNormalMode(ctx:ChatContext,item:String ) throws {
    // 1. verify we got a proper AIReturns json
    let aireturns = try JSONDecoder().decode(AIReturns.self,from:item.data(using:.utf8)!)
@@ -110,9 +109,7 @@ func  prepOutputChannels(ctx:ChatContext)throws -> FileHandle? {
  
  
 
-public func pumpItUpNormal(ctx:ChatContext, templates: [String]) throws {
-  
-
+func pumpItUp(ctx:ChatContext, templates: [String]) throws {
   let jsonOutHandle = try prepOutputChannels(ctx:ctx)
   while ctx.pumpCount<=ctx.max {
     // keep doing until we hit user defined limit
@@ -128,12 +125,7 @@ public func pumpItUpNormal(ctx:ChatContext, templates: [String]) throws {
             if ctx.dontcall {
               dontCallTheAI(ctx:ctx, prompt: prompt)
             } else {
-             // switch ctx.style {
-             // case PumpStyle.validator:
-             //   callTheAIVeracity(ctx:ctx, prompt:  prompt )
-             // case PumpStyle.promptor:
-              callTheAINormal(ctx: ctx, prompt: prompt,jsonOut:jsonOutHandle)
-              //}
+              callTheAI(ctx: ctx, prompt: prompt,jsonOut:jsonOutHandle)
             }
           }
         } else {

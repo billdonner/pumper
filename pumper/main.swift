@@ -77,7 +77,7 @@ struct Veracitator: ParsableCommand, ChatBotInterface {
         print(">Contacting: \(ChatGPTURLString)")
       }
      
-      try pumpItUpNormal(ctx:ctx,templates:templates) // end pumpcount<=max
+      try pumpItUp(ctx:ctx,templates:templates) // end pumpcount<=max
       
       if ctx.pumpCount < ctx.max  {
         RunLoop.current.run() // suggested by fivestars blog
@@ -155,7 +155,7 @@ struct Pumper: ParsableCommand, ChatBotInterface {
       }
     
  
-      try pumpItUpNormal(ctx:ctx,templates:templates) // end pumpcount<=max
+      try pumpItUp(ctx:ctx,templates:templates) // end pumpcount<=max
       
       if ctx.pumpCount < ctx.max  {
         RunLoop.current.run() // suggested by fivestars blog
