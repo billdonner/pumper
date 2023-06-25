@@ -12,11 +12,10 @@ import q20kshare
 let ChatGPTModel = "text-davinci-003"
 let ChatGPTURLString = "https://api.openai.com/v1/completions"
  
-var jsonOutHandle:FileHandle? = nil
 
 import ArgumentParser
 
-struct Pumper: ParsableCommand {
+struct Pumper: ParsableCommand, ChatBotInterface {
   static let configuration = CommandConfiguration(
     abstract: "Split up a script file of Prompts and pump them in to the AI\n\n version 0.1.6",
     version: "0.1.6",
@@ -70,17 +69,7 @@ struct Pumper: ParsableCommand {
       }
       let ctx = ChatContext(apiKey: looky, apiURL: apiurl, outURL: outURL, model:ChatGPTModel, verbose:verbose, dots:dots,dontcall:dontcall,comments_pattern:comments_pattern,split_pattern:split_pattern, style:.promptor)
       
-      defer {
-        
-        func closeFile(fh:FileHandle?,suffix:String? = nil) {
-           if let fileHandle = fh , let suf = suffix {
-             fileHandle.write(suf.data(using: .utf8)!)
-             try! fileHandle.close()
-           }
-         }
-        closeFile(fh:jsonOutHandle,suffix:"]")
-        print(">Pumper Exiting Normally - Pumped:\(ctx.pumpCount)" + " Bad Json:\(ctx.badJsonCount)" + " Network Issues:\(ctx.networkGlitches)\n")
-      }
+    
       
       
    

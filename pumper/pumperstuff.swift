@@ -8,7 +8,7 @@
 import Foundation
 import q20kshare
 
-func callTheAINormal(ctx:ChatContext,prompt: String ) {
+func callTheAINormal(ctx:ChatContext,prompt: String,jsonOut:FileHandle? ) {
 
   // going to call the ai
   let start_time = Date()
@@ -20,7 +20,7 @@ func callTheAINormal(ctx:ChatContext,prompt: String ) {
       
       let cleaned = extractSubstringsInBrackets(input: "{ "  + response)
    
-        handleAIResponseNormal(ctx:ctx, cleaned )
+      handleAIResponseNormal(ctx:ctx, cleaned:cleaned, jsonOut:jsonOut )
     // if not good then pumpCount not
       if cleaned.count == 0 {
         print("\n>AI Response #\(ctx.tag): no challenges  \n")
@@ -41,14 +41,14 @@ func callTheAINormal(ctx:ChatContext,prompt: String ) {
   }
 }
 
-fileprivate func handleAIResponseNormal(ctx:ChatContext,_ cleaned: [String]) {
+fileprivate func handleAIResponseNormal(ctx:ChatContext,cleaned: [String],jsonOut:FileHandle?) {
   func handleNormalMode(ctx:ChatContext,item:String ) throws {
    // 1. verify we got a proper AIReturns json
    let aireturns = try JSONDecoder().decode(AIReturns.self,from:item.data(using:.utf8)!)
    // 2. make a Challenge from the stuff from AI
    let challenge:Challenge = aireturns.toChallenge()
    // 3. write JSON to file
-   if let fileHandle = jsonOutHandle  {
+   if let fileHandle = jsonOut {
      // append response with prepended comma if we need one
      if ctx.global_index == 0 {
        fileHandle.write(",".data(using: .utf8)!)
@@ -79,7 +79,7 @@ fileprivate func handleAIResponseNormal(ctx:ChatContext,_ cleaned: [String]) {
     }
   }
 }
-func  prepOutputChannels(ctx:ChatContext)throws {
+func  prepOutputChannels(ctx:ChatContext)throws -> FileHandle? {
    func prep(_ x:String, initial:String) throws  -> FileHandle? {
      if (FileManager.default.createFile(atPath: x, contents: nil, attributes: nil)) {
        print(">Pumper created \(x)")
@@ -105,7 +105,7 @@ func  prepOutputChannels(ctx:ChatContext)throws {
    }
   let s = String(ctx.outURL.deletingPathExtension().absoluteString.dropFirst(7))
    let x = s + ".json"
-   jsonOutHandle = try prep(x,initial:"[")
+   return  try prep(x,initial:"[")
  }
  
  
@@ -113,7 +113,7 @@ func  prepOutputChannels(ctx:ChatContext)throws {
 public func pumpItUpNormal(ctx:ChatContext, templates: [String]) throws {
   
 
-  try prepOutputChannels(ctx:ctx)
+  let jsonOutHandle = try prepOutputChannels(ctx:ctx)
   while ctx.pumpCount<=ctx.max {
     // keep doing until we hit user defined limit
       for (idx,t) in templates.enumerated() {
@@ -132,7 +132,7 @@ public func pumpItUpNormal(ctx:ChatContext, templates: [String]) throws {
              // case PumpStyle.validator:
              //   callTheAIVeracity(ctx:ctx, prompt:  prompt )
              // case PumpStyle.promptor:
-                callTheAINormal(ctx: ctx, prompt: prompt)
+              callTheAINormal(ctx: ctx, prompt: prompt,jsonOut:jsonOutHandle)
               //}
             }
           }

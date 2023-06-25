@@ -9,7 +9,7 @@ import Foundation
 import q20kshare
 
 
-func callTheAIVeracity(ctx:ChatContext,prompt: String ) {
+func callTheAIVeracity(ctx:ChatContext,prompt: String,jsonOut:FileHandle?  ) {
 
   // going to call the ai
   let start_time = Date()
@@ -22,7 +22,7 @@ func callTheAIVeracity(ctx:ChatContext,prompt: String ) {
       let cleaned = [response.trimmingCharacters(in: .whitespacesAndNewlines)]
   
  
-        handleAIResponseVeracity(ctx: ctx, cleaned )
+      handleAIResponseVeracity(ctx: ctx, cleaned:cleaned,jsonOut:jsonOut )
     // if not good then pumpCount not
       if cleaned.count == 0 {
         print("\n>AI Response #\(ctx.tag): no challenges  \n")
@@ -43,12 +43,12 @@ func callTheAIVeracity(ctx:ChatContext,prompt: String ) {
   }
 }
 
-fileprivate func handleAIResponseVeracity(ctx:ChatContext,_ cleaned: [String]) {
+fileprivate func handleAIResponseVeracity(ctx:ChatContext, cleaned: [String],jsonOut:FileHandle?) {
   func handleVeracityMode(ctx:ChatContext,item:String) throws {
     let opinion = try getOpinion(item,source:ChatGPTModel)
     if let opinion = opinion {
       // 3. write JSON to file
-      if let fileHandle = jsonOutHandle  {
+      if let fileHandle = jsonOut  {
         // append response with prepended comma if we need one
         if !ctx.first {
           fileHandle.write(",".data(using: .utf8)!)
@@ -83,7 +83,7 @@ fileprivate func handleAIResponseVeracity(ctx:ChatContext,_ cleaned: [String]) {
 
 public func pumpItUpVeracity(ctx:ChatContext, templates: [String]) throws {
   
- func prepOutputChannels() throws {
+ func prepOutputChannels() throws  -> FileHandle? {
     func prep(_ x:String, initial:String) throws  -> FileHandle? {
       if (FileManager.default.createFile(atPath: x, contents: nil, attributes: nil)) {
         print(">Pumper created \(x)")
@@ -108,11 +108,11 @@ public func pumpItUpVeracity(ctx:ChatContext, templates: [String]) throws {
       throw PumpingErrors.onlyLocalFilesSupported
     }
     let s = String(x.dropFirst(7))
-    jsonOutHandle = try prep(s + ".json",initial:"[")
+    return try prep(s + ".json",initial:"[")
   }
   
   
-  try prepOutputChannels()
+  let jsonout = try prepOutputChannels()
   while ctx.pumpCount<=ctx.max {
     // keep doing until we hit user defined limit
       for (idx,t) in templates.enumerated() {
@@ -127,7 +127,7 @@ public func pumpItUpVeracity(ctx:ChatContext, templates: [String]) throws {
             if ctx.dontcall {
               dontCallTheAI(ctx:ctx, prompt: prompt)
             } else {
-                callTheAIVeracity(ctx:ctx, prompt:  prompt )
+              callTheAIVeracity(ctx:ctx, prompt:  prompt, jsonOut: jsonout)
             }
           }
         } else {
