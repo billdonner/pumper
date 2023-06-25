@@ -74,7 +74,7 @@ fileprivate func handleAIResponseVeracity(ctx:ChatContext, cleaned: [String],jso
         try handleVeracityMode(ctx:ctx,item:item)
     }// do
     catch {
-      print(">Could not decode \(error), \n>*** BAD JSON FOLLOWS ***\n\(cleaned[idx])\n>*** END BAD JSON ***\n")
+      print(">Veracitator: Could not decode \(error), \n>*** BAD JSON FOLLOWS ***\n\(cleaned[idx])\n>*** END BAD JSON ***\n")
       ctx.badJsonCount += 1
       print("*** continuing ***\n")
     }
@@ -86,7 +86,7 @@ public func pumpItUpVeracity(ctx:ChatContext, templates: [String]) throws {
  func prepOutputChannels() throws  -> FileHandle? {
     func prep(_ x:String, initial:String) throws  -> FileHandle? {
       if (FileManager.default.createFile(atPath: x, contents: nil, attributes: nil)) {
-        print(">Pumper created \(x)")
+        print(">Veracitator created \(x)")
       } else {
         print("\(x) not created."); throw PumpingErrors.badOutputURL
       }
