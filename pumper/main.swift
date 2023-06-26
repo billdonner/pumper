@@ -15,7 +15,9 @@ let ChatGPTURLString = "https://api.openai.com/v1/completions"
 
 import ArgumentParser
 
-struct Pumper: ParsableCommand, ChatBotInterface {
+struct Pumper: ParsableCommand {
+
+  
 //  Step 1: Pumper executes the script, sending each prompt to the ChatBot and generating a single output file of JSON Challenges which is read by Prepper and, in a later step, by Blender
 
 
@@ -27,15 +29,12 @@ struct Pumper: ParsableCommand, ChatBotInterface {
     helpNames: [.long, .short]
   )
 
-
   @Argument(help: "Input text script file (Between_0_1.txt):")
   var input: String
   
   @Argument( help:"Output json file (Between_1_2.json):")
   var output: String
 
-
-  
   @Option(name: .long, help: "How many prompts to execute")
   var max: Int = 65535
   
@@ -82,14 +81,28 @@ struct Pumper: ParsableCommand, ChatBotInterface {
         print(">Prompts url: \(url)  (\(contents.count) bytes, \(templates.count) templates)")
         print(">Contacting: \(ChatGPTURLString)")
       }
-    
- 
-      try pumpItUp(ctx:ctx,templates:templates) // end pumpcount<=max
       
-      if ctx.pumpCount < ctx.max  {
+      let jsonOutHandle = try prepOutputChannels(ctx:ctx)
+      do {
+        
+        if let jsonOutHandle = jsonOutHandle {
+          try pumpItUp(ctx:ctx,templates:templates, jsonOutHandle: jsonOutHandle)
+        }
+      }
+      catch {
+        if error as? PumpingErrors == PumpingErrors.reachedMaxLimit {
+          print("\n>Pumper reached max limit of \(ctx.max) prompts sent to the AI")
+        }
+        else {
+          print ("Unknown error: \(error)")
+        }
+      }
+      
+      if ctx.pumpCount <= ctx.max  {
         RunLoop.current.run() // suggested by fivestars blog
       }
       print(">Pumper Exiting Normally - Pumped:\(ctx.pumpCount)" + " Bad Json: \( ctx.badJsonCount)" + " Network Issues: \(ctx.networkGlitches)\n")
+      
     }// otherwise we should exit
   }
   
