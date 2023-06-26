@@ -49,9 +49,8 @@ func handleAIResponse(ctx:ChatContext,cleaned: [String],jsonOut:FileHandle?) {
    // 3. write JSON to file
    if let fileHandle = jsonOut {
      // append response with prepended comma if we need one
-     if ctx.global_index == 0 {
+     if ctx.global_index != 1 {
        fileHandle.write(",".data(using: .utf8)!)
-       ctx.global_index = 1
      }
      // 4. encode Challenge as JSON and write that out
      let encoder = JSONEncoder()

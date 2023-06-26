@@ -21,7 +21,7 @@ struct Pumper: ParsableCommand, ChatBotInterface {
 
   static let configuration = CommandConfiguration(
     abstract: " Step 1: Pumper executes the script, sending each prompt to the ChatBot and generating a single output file of JSON Challenges which is read by Prepper and, in a later step, by Blender.",
-    version: "0.1.6",
+    version: "0.2.1",
     subcommands: [],
     defaultSubcommand: nil,
     helpNames: [.long, .short]
@@ -60,7 +60,7 @@ struct Pumper: ParsableCommand, ChatBotInterface {
 
     func run() throws {
       print(">Pumper Command Line: \(CommandLine.arguments)")
-      print(">Pumper running at \(Date())")
+      print(">Pumper is STEP1 running at \(Date())")
       
       let  looky = ProcessInfo.processInfo.environment["OPENAI_API_KEY"]
       guard let looky=looky  else { throw PumpingErrors.noAPIKey }
