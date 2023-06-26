@@ -52,20 +52,24 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "https://billdonner.com/fs/gd/pumper-input-data.txt"
-            isEnabled = "NO">
+            argument = "file:///Users/billdonner/Desktop/fs/Between_0_1.txt"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "file:///Users/billdonner/Desktop/fs/prepper-main-in.json"
-            isEnabled = "NO">
+            argument = "file:///Users/billdonner/Desktop/fs/Between_1_2.json"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--dots true"
-            isEnabled = "NO">
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--max 2"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--verbose true"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--unique false "
@@ -73,14 +77,14 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--help"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = ""
-            value = ""
-            isEnabled = "NO">
+            key = "OPENAI_API_KEY"
+            value = "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"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
