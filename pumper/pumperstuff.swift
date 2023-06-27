@@ -109,10 +109,10 @@ extension Pumper:ChatBotInterface {
 
   func pumpItUp(ctx:ChatContext, templates: [String],jsonOut:FileHandle) throws {
 
-    while ctx.pumpCount<=ctx.max {
+    while ctx.pumpCount<ctx.max {
       // keep doing until we hit user defined limit
       for (idx,t) in templates.enumerated() {
-        guard ctx.pumpCount <= ctx.max else { throw PumpingErrors.reachedMaxLimit }
+        guard ctx.pumpCount < ctx.max else { throw PumpingErrors.reachedMaxLimit }
         let prompt0 = stripComments(source: String(t), commentStart: ctx.comments_pattern)
         if t.count > 0 {
           let prompt = standardSubstitutions(source:prompt0,stats:ctx)
