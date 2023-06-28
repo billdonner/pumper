@@ -13,7 +13,28 @@ import ArgumentParser
 let ChatGPTModel = "text-davinci-003"
 let ChatGPTURLString = "https://api.openai.com/v1/completions"
  
-
+func handleItem(ctx:ChatContext,item:String,jsonOut:FileHandle?) throws {
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = .prettyPrinted
+  let decoder = JSONDecoder()
+  // 1. verify we got a proper AIReturns json
+  let aireturns = try decoder.decode(AIReturns.self,from:item.data(using:.utf8)!)
+  // 2. make a Challenge from the stuff from AI - generates UUID for challenge block
+  let challenge:Challenge = aireturns.toChallenge(source:ChatGPTModel,prompt:ctx.prompt)
+  // 3. write JSON to file
+  if let fileHandle = jsonOut {
+    // append response with prepended comma if we need one
+    if ctx.global_index != 1 {
+      fileHandle.write(",".data(using: .utf8)!)
+    }
+    // 4. encode Challenge as JSON and write that out
+    let data = try encoder.encode(challenge)
+    let str = String(data:data,encoding: .utf8)
+    if let str = str {
+      fileHandle.write(str.data(using: .utf8)!)
+    }
+  }
+}
 
 struct Pumper: ParsableCommand {
 
@@ -61,7 +82,6 @@ struct Pumper: ParsableCommand {
       print(">Pumper Command Line: \(CommandLine.arguments)")
       print(">Pumper is STEP1 running at \(Date())")
       
- 
       let apiKey = try getAPIKey()
       print(">Pumper Using apikey: " + apiKey)
       guard let apiurl = URL(string: ChatGPTURLString) else {
@@ -85,7 +105,12 @@ struct Pumper: ParsableCommand {
       do {
         
         if let jsonOutHandle = jsonOutHandle {
-          try pumpItUp(ctx:ctx,templates:templates, jsonOut: jsonOutHandle)
+          try pumpItUp(ctx:ctx,templates:templates, jsonOut: jsonOutHandle, cleaner: {s in
+            extractSubstringsInBrackets(input: "{ "  + s)
+          },itemHandler: { x,y,z in
+          try  handleItem(ctx:x,item:y,jsonOut:z)
+            
+          })
         }
       }
       catch {
