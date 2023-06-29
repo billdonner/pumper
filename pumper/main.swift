@@ -44,7 +44,7 @@ struct Pumper: ParsableCommand {
 
   static let configuration = CommandConfiguration(
     abstract: " Step 1: Pumper executes the script, sending each prompt to the ChatBot and generating a single output file of JSON Challenges which is read by Prepper and, in a later step, by Blender.",
-    version: "0.2.1",
+    version: "0.2.13",
     subcommands: [],
     defaultSubcommand: nil,
     helpNames: [.long, .short]
