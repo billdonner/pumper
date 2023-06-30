@@ -61,10 +61,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--dots true"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--max 1"
+            argument = "--max 50"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

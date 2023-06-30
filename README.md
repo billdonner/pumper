@@ -1,6 +1,6 @@
 # PUMPER - Read a script and Pump thru ChatGPT
 
-Freeport.Software - 0.2.13
+Freeport.Software - 0.2.14
 ```
 OVERVIEW:  Step 1: Pumper executes the script, sending each prompt to the
 ChatBot and generating a single output file of JSON Challenges which is read by
